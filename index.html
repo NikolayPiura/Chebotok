@@ -1,0 +1,2496 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Редактируемое рабочее пространство проекта «Капитал $1 миллион».">
+  <meta name="theme-color" content="#101828">
+  <title>Capital OS — проект $1 миллион</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --surface-3: #eef2f7;
+      --ink: #101828;
+      --muted: #667085;
+      --line: #dfe5ed;
+      --accent: #635bff;
+      --accent-2: #00a88f;
+      --accent-soft: #eeecff;
+      --danger: #d92d20;
+      --warning: #b54708;
+      --success: #067647;
+      --shadow: 0 20px 55px rgba(16, 24, 40, .09);
+      --radius: 22px;
+      --card-gap: 22px;
+      --workspace-width: 1080px;
+      --sidebar-width: 220px;
+      --card-padding: 30px;
+      --text-scale: 1;
+      --font-stack: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --card-shadow: 0 16px 44px rgba(16, 24, 40, .08);
+      --hero-1: #101828;
+      --hero-2: #25205f;
+      --hero-3: #245b55;
+    }
+
+    body[data-theme="midnight"] {
+      color-scheme: dark;
+      --bg: #080d18;
+      --surface: #111827;
+      --surface-2: #161f2f;
+      --surface-3: #202b3c;
+      --ink: #f8fafc;
+      --muted: #9aa7b8;
+      --line: #293548;
+      --accent: #8b83ff;
+      --accent-2: #2dd4bf;
+      --accent-soft: #252247;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .34);
+      --hero-1: #050914;
+      --hero-2: #181b45;
+      --hero-3: #124e4a;
+    }
+
+    body[data-theme="graphite"] {
+      color-scheme: dark;
+      --bg: #121212;
+      --surface: #1b1b1b;
+      --surface-2: #232323;
+      --surface-3: #2c2c2c;
+      --ink: #f4f4f4;
+      --muted: #a7a7a7;
+      --line: #383838;
+      --accent: #f5f5f5;
+      --accent-2: #b7b7b7;
+      --accent-soft: #303030;
+      --shadow: 0 22px 60px rgba(0, 0, 0, .35);
+      --hero-1: #050505;
+      --hero-2: #252525;
+      --hero-3: #414141;
+    }
+
+    body[data-theme="sand"] {
+      --bg: #f3eee5;
+      --surface: #fffaf1;
+      --surface-2: #f8f0e4;
+      --surface-3: #eee2d1;
+      --ink: #2f271f;
+      --muted: #75685a;
+      --line: #dfd1bf;
+      --accent: #b65f35;
+      --accent-2: #48776b;
+      --accent-soft: #f3dfd2;
+      --shadow: 0 20px 55px rgba(77, 52, 32, .12);
+      --hero-1: #3b2d22;
+      --hero-2: #7d432d;
+      --hero-3: #315b52;
+    }
+
+    body[data-theme="ocean"] {
+      --bg: #eef7fa;
+      --surface: #ffffff;
+      --surface-2: #f2f9fb;
+      --surface-3: #dceef2;
+      --ink: #0c2d3a;
+      --muted: #547581;
+      --line: #cbe1e7;
+      --accent: #007c91;
+      --accent-2: #22a6a1;
+      --accent-soft: #dff4f5;
+      --hero-1: #062e3b;
+      --hero-2: #075985;
+      --hero-3: #0f766e;
+    }
+
+    body[data-theme="emerald"] {
+      --bg: #edf7f1;
+      --surface: #ffffff;
+      --surface-2: #f2f9f5;
+      --surface-3: #dcece2;
+      --ink: #153528;
+      --muted: #5e766b;
+      --line: #cfe2d6;
+      --accent: #178b5b;
+      --accent-2: #8a9d34;
+      --accent-soft: #dff3e7;
+      --hero-1: #102f25;
+      --hero-2: #14532d;
+      --hero-3: #4d7c0f;
+    }
+
+    body[data-theme="wine"] {
+      --bg: #f8f1f4;
+      --surface: #ffffff;
+      --surface-2: #fbf5f7;
+      --surface-3: #f0dfe5;
+      --ink: #3a1725;
+      --muted: #806271;
+      --line: #e5cfd8;
+      --accent: #9f3158;
+      --accent-2: #c16c52;
+      --accent-soft: #f6e2ea;
+      --hero-1: #3a1023;
+      --hero-2: #7f1d4e;
+      --hero-3: #9a3412;
+    }
+
+    body[data-theme="lavender"] {
+      --bg: #f5f2fb;
+      --surface: #ffffff;
+      --surface-2: #f8f6fc;
+      --surface-3: #e9e2f5;
+      --ink: #2e2440;
+      --muted: #756b85;
+      --line: #ddd4eb;
+      --accent: #7857c7;
+      --accent-2: #c05c9a;
+      --accent-soft: #eee7fb;
+      --hero-1: #24163d;
+      --hero-2: #5b3aa8;
+      --hero-3: #9d3f7a;
+    }
+
+    body[data-theme="cobalt"] {
+      --bg: #eff4ff;
+      --surface: #ffffff;
+      --surface-2: #f5f8ff;
+      --surface-3: #e0e9ff;
+      --ink: #14295a;
+      --muted: #607196;
+      --line: #d0dcf5;
+      --accent: #225bd8;
+      --accent-2: #5c76e8;
+      --accent-soft: #e4ebff;
+      --hero-1: #0d2357;
+      --hero-2: #1d4ed8;
+      --hero-3: #4338ca;
+    }
+
+    body[data-theme="mono"] {
+      --bg: #f3f3f3;
+      --surface: #ffffff;
+      --surface-2: #f7f7f7;
+      --surface-3: #e5e5e5;
+      --ink: #111111;
+      --muted: #696969;
+      --line: #d8d8d8;
+      --accent: #222222;
+      --accent-2: #777777;
+      --accent-soft: #ededed;
+      --hero-1: #080808;
+      --hero-2: #2b2b2b;
+      --hero-3: #595959;
+    }
+
+    body[data-density="compact"] {
+      --card-gap: 12px;
+      --radius: 16px;
+    }
+
+    body[data-font="modern"] { --font-stack: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body[data-font="humanist"] { --font-stack: "Avenir Next", Avenir, Inter, ui-sans-serif, sans-serif; }
+    body[data-font="editorial"] { --font-stack: Georgia, "Times New Roman", serif; }
+    body[data-font="technical"] { --font-stack: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    body[data-font-size="small"] { --text-scale: .9; }
+    body[data-font-size="medium"] { --text-scale: 1; }
+    body[data-font-size="large"] { --text-scale: 1.12; }
+    body[data-font-size="xl"] { --text-scale: 1.24; }
+    body[data-depth="flat"] { --card-shadow: none; --shadow: none; }
+    body[data-depth="soft"] { --card-shadow: 0 16px 44px rgba(16, 24, 40, .08); }
+    body[data-depth="deep"] { --card-shadow: 0 26px 80px rgba(16, 24, 40, .18); --shadow: 0 30px 90px rgba(16, 24, 40, .22); }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 78% -12rem, color-mix(in srgb, var(--accent) 13%, transparent), transparent 35rem),
+        var(--bg);
+      font-family: var(--font-stack);
+      line-height: 1.5;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    body.modal-open { overflow: hidden; }
+    button, input, textarea, select { font: inherit; }
+    button { color: inherit; }
+    [hidden] { display: none !important; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 66px;
+      padding: 10px clamp(14px, 3vw, 38px);
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+      font-weight: 850;
+      letter-spacing: -.03em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 11px;
+      font-size: 12px;
+      letter-spacing: -.04em;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .top-actions, .toolbar, .card-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .save-state {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .btn, .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 9px 14px;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 750;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+
+    .btn:hover, .icon-btn:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+    }
+
+    .btn.primary {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn svg { flex: 0 0 auto; }
+
+    body[data-theme="graphite"] .btn.primary { color: #111; }
+    .btn.ghost { background: transparent; }
+    .btn.danger { color: var(--danger); }
+
+    .icon-btn {
+      width: 38px;
+      min-height: 38px;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    .workspace {
+      display: block;
+      width: min(var(--workspace-width), calc(100% - var(--sidebar-width) - 64px));
+      margin-left: calc(var(--sidebar-width) + max(32px, (100vw - var(--sidebar-width) - var(--workspace-width)) / 2));
+      margin-right: 24px;
+      padding: 28px 0 72px;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 66px;
+      bottom: 0;
+      z-index: 30;
+      width: var(--sidebar-width);
+      max-height: none;
+      overflow: auto;
+      padding: 22px 15px;
+      background: var(--surface);
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-radius: 0;
+      box-shadow: 12px 0 34px rgba(16, 24, 40, .045);
+    }
+
+    .sidebar h2 {
+      margin: 0;
+      font-size: calc(22px * var(--text-scale));
+      line-height: 1.05;
+      letter-spacing: -.035em;
+    }
+
+    .progress-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 7px;
+    }
+
+    .progress-row strong { font-size: 26px; letter-spacing: -.04em; }
+    .progress-row span { color: var(--muted); font-size: 11px; }
+
+    .progress-track {
+      overflow: hidden;
+      height: 8px;
+      background: var(--surface-3);
+      border-radius: 999px;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: inherit;
+      transition: width .25s ease;
+    }
+
+    .phase-nav {
+      display: grid;
+      gap: 1px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .phase-nav a {
+      display: grid;
+      grid-template-columns: 18px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 7px;
+      padding: 6px;
+      color: var(--muted);
+      border-radius: 9px;
+      text-decoration: none;
+      font-size: 11px;
+      line-height: 1.2;
+    }
+
+    .phase-nav a:hover, .phase-nav a.active {
+      color: var(--ink);
+      background: var(--surface-2);
+    }
+
+    .nav-dot {
+      display: grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      color: var(--muted);
+      background: var(--surface-3);
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 850;
+    }
+
+    .phase-nav a.is-complete { color: var(--success); background: color-mix(in srgb, var(--success) 10%, var(--surface)); }
+    .phase-nav a.is-complete .nav-dot { color: #fff; background: var(--success); }
+    .nav-capital { font-size: 9px; white-space: nowrap; }
+
+    .main { min-width: 0; }
+
+    .intro {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 4vw, 38px);
+      color: #fff;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.16), transparent 21rem),
+        linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 58%, var(--hero-3) 130%);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+    }
+
+    .intro-kicker {
+      margin: 0 0 10px;
+      color: #c9c5ff;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .intro h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(calc(38px * var(--text-scale)), 5vw, calc(54px * var(--text-scale)));
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .intro-copy {
+      max-width: 920px;
+      margin: 13px 0 0;
+      color: #f1f4f9;
+      font-size: calc(22px * var(--text-scale));
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -.02em;
+    }
+
+    .intro-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 28px;
+    }
+
+    .intro-stat {
+      padding: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+    }
+
+    .intro-stat span {
+      display: block;
+      margin-bottom: 3px;
+      color: #b9c5d6;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .intro-stat strong { font-size: 19px; letter-spacing: -.025em; }
+
+    .workspace-toolbar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 31px 0 18px;
+    }
+
+    .workspace-toolbar h2 {
+      margin: 0 0 5px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .workspace-toolbar p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .completed-stages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, max-content));
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 16px 38px;
+      padding: 10px;
+      background: color-mix(in srgb, #12b76a 8%, var(--surface));
+      border: 1px solid color-mix(in srgb, #12b76a 34%, var(--line));
+      border-radius: 14px;
+    }
+
+    .completed-stages > span {
+      grid-column: 1 / -1;
+      margin: 0 4px;
+      color: var(--success);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .completed-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      color: #d1fadf;
+      background: #067647;
+      border: 1px solid #12b76a;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .completed-chip strong { color: #fff; }
+    .completed-chip.is-open { color: var(--success); background: transparent; }
+    .completed-chip.is-open strong { color: var(--success); }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: var(--card-gap);
+      padding-left: 38px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 22px;
+      bottom: 22px;
+      width: 2px;
+      background: linear-gradient(var(--accent), var(--accent-2), var(--line));
+    }
+
+    .phase-card {
+      --phase-accent: var(--accent);
+      position: relative;
+      overflow: visible;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      scroll-margin-top: 88px;
+    }
+
+    .phase-card:hover { border-color: color-mix(in srgb, var(--phase-accent) 38%, var(--line)); }
+    .phase-card.is-complete {
+      --phase-accent: #079455 !important;
+      background: color-mix(in srgb, #12b76a 12%, var(--surface));
+      border-color: color-mix(in srgb, #12b76a 68%, var(--line));
+      box-shadow: 0 24px 70px color-mix(in srgb, #12b76a 22%, transparent);
+    }
+    .phase-card.is-complete .goal-block,
+    .phase-card.is-complete .detail-block,
+    .phase-card.is-complete .number { background: color-mix(in srgb, #12b76a 10%, var(--surface)); }
+    .phase-card.is-complete .phase-index,
+    .phase-card.is-complete .phase-progress-badge { color: #fff; background: #079455; border-color: #079455; }
+    .phase-card.is-dragover { transform: translateY(4px); border: 2px dashed var(--accent); }
+    .phase-card.is-filtered { display: none; }
+
+    .phase-index {
+      position: absolute;
+      left: -53px;
+      top: 24px;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      color: #fff;
+      background: var(--phase-accent);
+      border: 5px solid var(--bg);
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 900;
+      box-sizing: content-box;
+    }
+
+    .phase-head { padding: var(--card-padding); }
+
+    .phase-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 13px;
+      margin-bottom: 13px;
+    }
+
+    .phase-label {
+      color: var(--phase-accent);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .phase-progress-badge {
+      padding: 6px 9px;
+      color: var(--phase-accent);
+      background: color-mix(in srgb, var(--phase-accent) 9%, var(--surface));
+      border: 1px solid color-mix(in srgb, var(--phase-accent) 25%, var(--line));
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .drag-handle { cursor: grab; }
+    .drag-handle:active { cursor: grabbing; }
+
+    .more-menu { position: relative; }
+    .more-menu summary {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 900;
+      list-style: none;
+    }
+
+    .more-menu summary::-webkit-details-marker { display: none; }
+    .more-menu[open] summary { border-color: var(--accent); }
+
+    .more-popover {
+      position: absolute;
+      right: 0;
+      top: 44px;
+      z-index: 12;
+      display: grid;
+      min-width: 175px;
+      padding: 7px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .more-popover button {
+      padding: 9px 10px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-radius: 8px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .more-popover button:hover { background: var(--surface-2); }
+    .more-popover button.danger { color: var(--danger); }
+
+    .phase-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .phase-title-row h3 {
+      margin: 0;
+      font-size: clamp(calc(28px * var(--text-scale)), 3.7vw, calc(46px * var(--text-scale)));
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .goal-block {
+      margin-top: 20px;
+      padding: clamp(18px, 2.6vw, 26px);
+      background: linear-gradient(135deg, var(--accent-soft), color-mix(in srgb, var(--accent-soft) 35%, var(--surface)));
+      border: 1px solid color-mix(in srgb, var(--phase-accent) 20%, var(--line));
+      border-radius: calc(var(--radius) - 6px);
+    }
+
+    .goal-block span {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--phase-accent);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .goal-block strong {
+      display: block;
+      max-width: 850px;
+      font-size: calc(22px * var(--text-scale));
+      line-height: 1.22;
+      letter-spacing: -.025em;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .number {
+      padding: 13px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+    }
+
+    .number span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .number strong { font-size: calc(19px * var(--text-scale)); letter-spacing: -.025em; }
+
+    .phase-detail {
+      padding: 0 var(--card-padding) var(--card-padding);
+      border-top: 1px solid transparent;
+    }
+
+    .phase-card.collapsed .phase-detail { display: none; }
+    .phase-card.collapsed .phase-head { padding-bottom: 22px; }
+
+    .description {
+      margin: 0 0 21px;
+      padding: 18px;
+      color: color-mix(in srgb, var(--ink) 88%, var(--muted));
+      background: var(--accent-soft);
+      border-radius: 15px;
+    }
+
+    .description p { margin: 0; }
+    .description p + p { margin-top: 10px; }
+
+    .detail-block {
+      padding: clamp(18px, 2.5vw, 26px);
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .detail-block h4 {
+      margin: 0 0 13px;
+      font-size: calc(14px * var(--text-scale));
+      letter-spacing: -.01em;
+    }
+
+    .clean-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .clean-list li {
+      position: relative;
+      padding-left: 23px;
+      color: color-mix(in srgb, var(--ink) 78%, var(--muted));
+      font-size: calc(14px * var(--text-scale));
+    }
+
+    .clean-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 1px;
+      display: grid;
+      place-items: center;
+      width: 16px;
+      height: 16px;
+      color: #fff;
+      background: var(--phase-accent);
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .task-list {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .task-item {
+      display: grid;
+      grid-template-columns: 19px minmax(0, 1fr);
+      gap: 9px;
+      align-items: start;
+      color: color-mix(in srgb, var(--ink) 82%, var(--muted));
+      font-size: calc(14px * var(--text-scale));
+      cursor: pointer;
+    }
+
+    .task-item input {
+      width: 17px;
+      height: 17px;
+      margin: 1px 0 0;
+      accent-color: var(--phase-accent);
+      cursor: pointer;
+    }
+
+    .task-item.done span {
+      color: var(--muted);
+    }
+
+    .task-progress {
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      text-align: right;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .role {
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .role span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .role p { margin: 0; font-size: 13px; }
+
+    .gate {
+      margin-top: 14px;
+      padding: 17px 18px;
+      border: 1px solid color-mix(in srgb, var(--accent-2) 45%, var(--line));
+      border-left: 5px solid var(--accent-2);
+      border-radius: 14px;
+    }
+
+    .gate strong { display: block; margin-bottom: 6px; color: var(--accent-2); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .gate p { margin: 0; color: var(--ink); font-size: calc(15px * var(--text-scale)); font-weight: 700; }
+
+    .risk-line {
+      margin: 11px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .risk-line strong { color: var(--warning); }
+
+    .empty-search {
+      padding: 44px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+
+    .operating-model {
+      margin-top: 28px;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .operating-model h3 { margin: 0 0 5px; font-size: 20px; }
+    .operating-model > p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .model-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 17px;
+    }
+
+    .model-step {
+      padding: 14px;
+      background: var(--surface-2);
+      border-radius: 13px;
+      font-size: 12px;
+    }
+
+    .model-step strong { display: block; margin-bottom: 4px; color: var(--accent); }
+
+    .legal-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    dialog {
+      width: min(920px, calc(100% - 24px));
+      max-height: min(90vh, 920px);
+      padding: 0;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 28px 90px rgba(0,0,0,.28);
+    }
+
+    dialog::backdrop {
+      background: rgba(5, 10, 20, .58);
+      backdrop-filter: blur(4px);
+    }
+
+    .dialog-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dialog-head h2 { margin: 0; font-size: 22px; letter-spacing: -.03em; }
+    .dialog-body { padding: 22px; }
+    .dialog-foot {
+      position: sticky;
+      bottom: 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      padding: 16px 22px;
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .field { display: grid; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+
+    .field label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .field input, .field textarea, .field select {
+      width: 100%;
+      padding: 11px 12px;
+      color: var(--ink);
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      outline: none;
+    }
+
+    .field textarea { min-height: 105px; resize: vertical; }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--accent); }
+    .field-help { margin: 0; color: var(--muted); font-size: 10px; }
+
+    .settings-section {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 18px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .settings-section > h3 {
+      grid-column: 1 / -1;
+      margin: 0;
+      font-size: 15px;
+      letter-spacing: -.02em;
+    }
+
+    .range-field { display: grid; gap: 8px; }
+    .range-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .range-head label { margin: 0; }
+    .range-head output { color: var(--accent); font-size: 12px; font-weight: 850; }
+    .range-field input[type="range"] { padding: 0; accent-color: var(--accent); }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .theme-option {
+      position: relative;
+      display: grid;
+      gap: 9px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      cursor: pointer;
+    }
+
+    .theme-option:has(input:checked) { border: 2px solid var(--accent); }
+    .theme-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .theme-preview { height: 58px; border-radius: 9px; }
+    .theme-option span { font-size: 12px; font-weight: 750; }
+    .preview-light { background: linear-gradient(135deg, #fff 50%, #635bff 50%); }
+    .preview-midnight { background: linear-gradient(135deg, #111827 50%, #8b83ff 50%); }
+    .preview-graphite { background: linear-gradient(135deg, #181818 50%, #ededed 50%); }
+    .preview-sand { background: linear-gradient(135deg, #fff4e6 50%, #b65f35 50%); }
+    .preview-ocean { background: linear-gradient(135deg, #e8f8fb 50%, #007c91 50%); }
+    .preview-emerald { background: linear-gradient(135deg, #edf9f1 50%, #178b5b 50%); }
+    .preview-wine { background: linear-gradient(135deg, #faedf2 50%, #9f3158 50%); }
+    .preview-lavender { background: linear-gradient(135deg, #f1eafa 50%, #7857c7 50%); }
+    .preview-cobalt { background: linear-gradient(135deg, #eaf0ff 50%, #225bd8 50%); }
+    .preview-mono { background: linear-gradient(135deg, #fff 50%, #222 50%); }
+
+    .data-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 8px;
+    }
+
+    .edit-phase-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+    }
+
+    .edit-phase-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    .edit-phase-button {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px;
+      color: var(--ink);
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .edit-phase-button:hover { border-color: var(--accent); }
+    .edit-phase-button .nav-dot { width: 28px; height: 28px; }
+    .edit-phase-button strong { display: block; font-size: 13px; }
+    .edit-phase-button small { color: var(--muted); font-size: 10px; }
+    .edit-phase-button b { color: var(--accent); font-size: 16px; }
+    .edit-phase-button b svg { display: block; }
+
+    .edit-order {
+      display: flex;
+      gap: 6px;
+    }
+
+    .edit-order .icon-btn {
+      width: 38px;
+      height: 100%;
+      min-height: 48px;
+      border-radius: 12px;
+    }
+
+    .edit-order .icon-btn:disabled {
+      opacity: .28;
+      cursor: default;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 100;
+      max-width: min(360px, calc(100% - 36px));
+      padding: 12px 15px;
+      color: #fff;
+      background: #101828;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+      font-size: 13px;
+    }
+
+    .toast.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 980px) {
+      .workspace { width: min(900px, calc(100% - 24px)); margin: 0 auto; }
+      .sidebar {
+        position: relative;
+        left: auto;
+        top: auto;
+        bottom: auto;
+        width: auto;
+        max-height: none;
+        margin-bottom: 18px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: 0 12px 35px rgba(16, 24, 40, .05);
+      }
+      .phase-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sidebar-note { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      .topbar { align-items: flex-start; }
+      .save-state { display: none; }
+      .top-actions .btn span { display: none; }
+      .workspace { width: min(100% - 14px, 900px); padding-top: 8px; }
+      .sidebar { padding: 16px; border-radius: 17px; }
+      .phase-nav { grid-template-columns: 1fr; max-height: 230px; overflow: auto; }
+      .intro { padding: 27px 20px; border-radius: 19px; }
+      .intro-copy { font-size: calc(18px * var(--text-scale)); line-height: 1.25; }
+      .intro-stats, .numbers, .detail-grid, .role-grid, .model-steps, .form-grid { grid-template-columns: 1fr; }
+      .theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .settings-section { grid-template-columns: 1fr; padding: 14px; }
+      .settings-section > h3 { grid-column: auto; }
+      .edit-phase-row { grid-template-columns: minmax(0, 1fr) auto; }
+      .workspace-toolbar { align-items: flex-start; flex-direction: column; }
+      .toolbar { width: 100%; }
+      .toolbar .btn { flex: 1; }
+      .timeline { padding-left: 26px; }
+      .completed-stages { margin-left: 26px; }
+      .timeline::before { left: 7px; }
+      .phase-index { left: -38px; width: 24px; height: 24px; border-width: 4px; }
+      .phase-title-row { flex-direction: column; }
+      .phase-topline { align-items: flex-start; }
+      .card-actions { justify-content: flex-end; }
+      .field.full { grid-column: auto; }
+      dialog { border-radius: 16px; }
+    }
+  </style>
+</head>
+<body data-theme="light" data-density="comfortable">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">$1M</span>
+      <div>Capital OS<small>интерактивный дашборд</small></div>
+    </div>
+    <div class="top-actions">
+      <span class="save-state" id="saveState">Изменения сохраняются автоматически</span>
+      <button class="btn" type="button" data-action="edit-workspace"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.4 2.8a2 2 0 0 1 2.8 2.8L6.4 14.4 2.5 15.5l1.1-3.9 8.8-8.8Z"/><path d="m11.1 4.1 2.8 2.8"/></svg><span>Редактировать</span></button>
+      <button class="btn primary" type="button" data-action="add-phase">＋ <span>Добавить этап</span></button>
+      <button class="btn" type="button" data-action="settings">⚙ <span>Настройки</span></button>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <aside class="sidebar">
+      <h2 id="sidebarTitle">Дашборд капитала</h2>
+      <div class="progress-row"><strong id="progressValue">0%</strong><span id="progressNote">0 из 11 готово</span></div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+      <nav aria-label="Навигация по этапам"><ol class="phase-nav" id="phaseNav"></ol></nav>
+    </aside>
+
+    <main class="main">
+      <section class="intro">
+        <h1 id="projectTitle">Цель</h1>
+        <p class="intro-copy" id="projectSubtitle">Довести чистый капитал Георгия Чеботка до $1,000,000, полностью закрыть обязательства, юридически оформить и защитить структуру владения, закрепить страхование и профессиональное управление капиталом.</p>
+      </section>
+
+      <section aria-labelledby="journeyTitle">
+        <div class="workspace-toolbar">
+          <div>
+            <h2 id="journeyTitle">Путь клиента</h2>
+          </div>
+        </div>
+        <div class="completed-stages" id="completedStages" hidden></div>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <dialog id="editPickerDialog">
+    <div class="dialog-head">
+      <h2>Редактирование этапов</h2>
+      <button class="icon-btn" type="button" data-action="close-edit-picker" aria-label="Закрыть">×</button>
+    </div>
+    <div class="dialog-body">
+      <div class="edit-phase-list" id="editPhaseList"></div>
+    </div>
+  </dialog>
+
+  <dialog id="phaseDialog">
+    <form id="phaseForm">
+      <div class="dialog-head">
+        <h2 id="phaseDialogTitle">Редактировать этап</h2>
+        <button class="icon-btn" type="button" data-action="close-editor" aria-label="Закрыть">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="form-grid">
+          <div class="field full"><label for="editTitle">Название этапа</label><input id="editTitle" name="title" required></div>
+          <div class="field"><label for="editCapital">Капитал в этой точке</label><input id="editCapital" name="capital" placeholder="$250,000"></div>
+          <div class="field"><label for="editObligations">Обязательства</label><input id="editObligations" name="obligations" placeholder="≤ $350,000"></div>
+          <div class="field full"><label for="editSummary">Цель этапа</label><textarea id="editSummary" name="summary" rows="3"></textarea></div>
+          <div class="field full"><label for="editTasks">Что конкретно делаем</label><textarea id="editTasks" name="tasks" rows="9"></textarea><p class="field-help">Каждый пункт — с новой строки.</p></div>
+          <div class="field full"><label for="editGate">Критерий завершения этапа</label><textarea id="editGate" name="gate"></textarea></div>
+        </div>
+      </div>
+      <div class="dialog-foot">
+        <button class="btn" type="button" data-action="close-editor">Отмена</button>
+        <button class="btn primary" type="submit">Сохранить этап</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog">
+    <form id="settingsForm">
+      <div class="dialog-head">
+        <h2>Настройки пространства</h2>
+        <button class="icon-btn" type="button" data-action="close-settings" aria-label="Закрыть">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="form-grid">
+          <div class="field full"><label for="settingsTitle">Заголовок цели</label><input id="settingsTitle" name="projectTitle"></div>
+          <div class="field full"><label for="settingsSubtitle">Формулировка цели</label><textarea id="settingsSubtitle" name="projectSubtitle"></textarea></div>
+          <div class="field"><label for="settingsDensity">Плотность карточек</label><select id="settingsDensity" name="density"><option value="comfortable">Просторно</option><option value="compact">Компактно</option></select></div>
+          <section class="settings-section">
+            <h3>Типографика и глубина</h3>
+            <div class="field"><label for="settingsFont">Шрифт</label><select id="settingsFont" name="font"><option value="modern">Modern / Inter</option><option value="humanist">Humanist / Avenir</option><option value="editorial">Editorial / Georgia</option><option value="technical">Technical / Mono</option></select></div>
+            <div class="field"><label for="settingsFontSize">Размер текста</label><select id="settingsFontSize" name="fontSize"><option value="small">Компактный</option><option value="medium">Средний</option><option value="large">Крупный</option><option value="xl">Очень крупный</option></select></div>
+            <div class="field"><label for="settingsDepth">Глубина и тени</label><select id="settingsDepth" name="depth"><option value="flat">Плоско</option><option value="soft">Мягко</option><option value="deep">Глубоко</option></select></div>
+            <div class="field"><label for="settingsRadius">Форма карточек</label><select id="settingsRadius" name="radiusPreset"><option value="0">Строго</option><option value="14">Сдержанно</option><option value="22">Мягко</option><option value="32">Максимально округло</option></select></div>
+          </section>
+          <section class="settings-section">
+            <h3>Геометрия рабочего пространства</h3>
+            <div class="range-field"><div class="range-head"><label for="settingsWidth">Ширина контента</label><output id="settingsWidthValue">1080 px</output></div><input id="settingsWidth" name="workspaceWidth" type="range" min="760" max="1440" step="20"></div>
+            <div class="range-field"><div class="range-head"><label for="settingsSidebarWidth">Ширина левой панели</label><output id="settingsSidebarWidthValue">220 px</output></div><input id="settingsSidebarWidth" name="sidebarWidth" type="range" min="180" max="340" step="10"></div>
+            <div class="range-field"><div class="range-head"><label for="settingsCardPadding">Высота и воздух карточек</label><output id="settingsCardPaddingValue">30 px</output></div><input id="settingsCardPadding" name="cardPadding" type="range" min="16" max="52" step="2"></div>
+            <div class="range-field"><div class="range-head"><label for="settingsCardGap">Расстояние между этапами</label><output id="settingsCardGapValue">22 px</output></div><input id="settingsCardGap" name="cardGap" type="range" min="8" max="52" step="2"></div>
+          </section>
+          <div class="field full">
+            <label>Дизайн</label>
+            <div class="theme-grid">
+              <label class="theme-option"><input type="radio" name="theme" value="light"><span class="theme-preview preview-light"></span><span>Светлый</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="midnight"><span class="theme-preview preview-midnight"></span><span>Ночной</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="graphite"><span class="theme-preview preview-graphite"></span><span>Графит</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="sand"><span class="theme-preview preview-sand"></span><span>Тёплый</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="ocean"><span class="theme-preview preview-ocean"></span><span>Океан</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="emerald"><span class="theme-preview preview-emerald"></span><span>Изумруд</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="wine"><span class="theme-preview preview-wine"></span><span>Бордо</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="lavender"><span class="theme-preview preview-lavender"></span><span>Лаванда</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="cobalt"><span class="theme-preview preview-cobalt"></span><span>Кобальт</span></label>
+              <label class="theme-option"><input type="radio" name="theme" value="mono"><span class="theme-preview preview-mono"></span><span>Моно</span></label>
+            </div>
+          </div>
+          <div class="field full">
+            <label>Резервная копия рабочего пространства</label>
+            <div class="data-tools">
+              <button class="btn" type="button" data-action="export-data">Скачать данные</button>
+              <button class="btn" type="button" data-action="import-data">Загрузить данные</button>
+              <input id="importInput" type="file" accept="application/json,.json" hidden>
+            </div>
+            <p class="field-help">Статусы и правки хранятся в браузере. JSON-файл позволяет перенести их на другое устройство.</p>
+          </div>
+        </div>
+      </div>
+      <div class="dialog-foot">
+        <button class="btn" type="button" data-action="close-settings">Отмена</button>
+        <button class="btn primary" type="submit">Сохранить настройки</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "capital-os-workspace-v11";
+      var PHASE_COLORS = ["#635bff", "#446cff", "#1677ff", "#009f8b", "#18835e", "#d17b0f", "#b54708", "#c1447e", "#7a5af8", "#475467", "#12a150"];
+      var STATUS_LABELS = {
+        "not-started": "Не начато",
+        "in-progress": "В работе",
+        "review": "На проверке",
+        "done": "Готово"
+      };
+      var STATUS_WEIGHTS = { "not-started": 0, "in-progress": .45, "review": .8, "done": 1 };
+
+      var defaultPhases = [
+        {
+          id: "foundation",
+          title: "Фундамент",
+          capital: "$0",
+          obligations: "≤ $600,000",
+          reward: "$500–1,500",
+          status: "not-started",
+          summary: "Создаём точную и проверяемую систему, на которой можно безопасно строить капитал до $1 млн.",
+          description: "Это не инвестиционный старт, а сборка операционной системы проекта. Мы договариваемся, что именно считаем капиталом, фиксируем реальную точку А, собираем документы и переводим все денежные потоки в единый управленческий контур. На этом этапе исчезают разночтения между клиентом, наставником, управляющим и финансовой командой.",
+          tasks: [
+            "Зафиксировать определение цели $1 млн: валюта, дата, состав капитала и правила оценки неликвидных активов.",
+            "Собрать полный баланс: счета, инвестиции, фонды, доли, недвижимость, займы к получению, кредиты, гарантии и будущие платежи.",
+            "Создать проект фонда с целевым капиталом $1 млн и правилом регулярных отчислений 10–20% от свободного денежного потока.",
+            "Картировать личные и бизнес-потоки за 12 месяцев, определить обязательные расходы, резерв и сумму регулярного взноса.",
+            "Написать инвестиционную, риск-, ликвидностную и конфликтную политики фонда.",
+            "Определить управляющего, его полномочия, лимиты, ответственность, формат отчётности и порядок остановки операций.",
+            "Описать роль и стратегию фондов Rate, «Москва» и Solid; проверить документы и экономический смысл каждого направления.",
+            "Создать защищённую комнату данных, реестр документов, матрицу доступов и журнал решений.",
+            "Назначить роли наставника, клиента, управляющего, юриста и финансового менеджера.",
+            "Запустить еженедельный ритм: обновление цифр, протокол решений, владельцы задач и сроки."
+          ],
+          deliverables: [
+            "Паспорт цели $1 млн и формула расчёта капитала.",
+            "Подтверждённый баланс активов и обязательств.",
+            "Карта денежных потоков и правило регулярных взносов.",
+            "Инвестиционный мандат и комплект базовых политик.",
+            "RACI-матрица ролей, лимитов и согласований.",
+            "Комната данных и реестр подтверждающих документов."
+          ],
+          mentor: "Проводит диагностику, задаёт архитектуру проекта, помогает сформулировать правила и превращает разрозненные данные в единый маршрут.",
+          client: "Раскрывает данные, подтверждает документы и ограничения, принимает правила и назначает ответственных.",
+          gate: "100% существенных активов и обязательств занесены и подтверждены; цель, роли, политики и регулярный ритм утверждены.",
+          risks: ["Завышенная оценка активов", "Скрытые обязательства", "Смешение личных и бизнес-средств", "Полномочия без контроля"]
+        },
+        {
+          id: "liability-safety",
+          title: "Безопасность обязательств",
+          capital: "₽10,000,000",
+          obligations: "≤ $600,000",
+          reward: "$500–1,500",
+          status: "not-started",
+          summary: "Убираем угрозу кассовых разрывов, дорогих ставок и валютного несоответствия до начала активной капитализации.",
+          description: "Каждое обязательство превращается из неопределённого риска в управляемый договор с приоритетом, календарём и конкретным следующим действием. Мы одновременно анализируем возврат денег из инвестиционных проектов и график собственных выплат, чтобы не строить план на неподтверждённых поступлениях.",
+          tasks: [
+            "Собрать единый реестр займов: кредитор, тело, ставка, валюта, срок, залог, штрафы, поручительства и подписанный договор.",
+            "Составить план возврата средств, вложенных в инвестиционные проекты, с вероятностью и датой каждого поступления.",
+            "Построить 13-недельный календарь ликвидности и выявить недели потенциального кассового разрыва.",
+            "Ранжировать обязательства по полной стоимости, валютному, юридическому, сроковому и репутационному риску.",
+            "Пролонгировать займы только на основании реалистичного плана возвратов и документально закрепить новые даты.",
+            "Рефинансировать займы, которые нельзя безопасно пролонгировать, а также долларовые и наиболее дорогие обязательства.",
+            "Отдельно проверить займы со ставкой выше 25–30% годовых и подготовить для них приоритетный сценарий выхода.",
+            "Перевести хаотичные платежи в понятные аннуитетные или иные равномерные графики, если это экономически выгодно.",
+            "Сбалансировать даты, суммы и валюты входящих и исходящих потоков.",
+            "Провести стресс-тест: падение дохода, задержка возврата, рост курса и одновременное предъявление нескольких долгов."
+          ],
+          deliverables: [
+            "Единый реестр обязательств и выданных займов.",
+            "13-недельный календарь ликвидности.",
+            "Рейтинг красных, жёлтых и зелёных обязательств.",
+            "План возвратов из проектов и план погашений.",
+            "Переговорные позиции и проекты дополнительных соглашений.",
+            "Стресс-тест и набор заранее согласованных защитных действий."
+          ],
+          mentor: "Выстраивает приоритеты, проверяет экономику рефинансирования, готовит сценарии переговоров и контролирует покрытие.",
+          client: "Предоставляет договоры, участвует в переговорах и подписывает только проверенные изменения условий.",
+          gate: "На горизонте 13 недель нет необеспеченного разрыва; каждый красный долг имеет согласованный и документированный план.",
+          risks: ["Считать обещанный возврат доступными деньгами", "Игнорировать валютный риск", "Рефинансировать без расчёта полной стоимости"]
+        },
+        {
+          id: "first-money",
+          title: "Первые деньги",
+          capital: "$50,000",
+          obligations: "≤ $550,000",
+          reward: "$500–1,500",
+          status: "not-started",
+          summary: "Формируем первые устойчивые $50 тысяч не одной удачной сделкой, а повторяемой системой накопления.",
+          description: "На этом этапе стратегия начинает давать измеримый финансовый результат. Клиент получает финансовый план №1, резервный счёт, автоматические взносы и понятную модель на год. Параллельно создаётся процесс отбора инвестиционных инициатив, чтобы новые вложения не разрушали ликвидность и дисциплину.",
+          tasks: [
+            "Сделать личный финансовый план и ФП №1 с планом доходов, расходов, долгов, резервов и взносов.",
+            "Собрать финансовую модель на 12 месяцев с базовым, осторожным и стрессовым сценариями.",
+            "Определить месяц и ценовой коридор продажи каждого непрофильного актива.",
+            "Открыть отдельный резервный счёт и зафиксировать неснижаемый остаток.",
+            "Автоматизировать взносы в фонд и постепенно увеличить долю от свободного денежного потока.",
+            "Добавить в общий контур обязательства и договорённости, которые были согласованы в начале проекта.",
+            "Пройти базовый курс по инвестиционной стратегии и зафиксировать личные правила принятия решений.",
+            "Создать фонд инвестиционных инициатив: заявка, минимальный due diligence, лимит и решение инвестиционного комитета.",
+            "Провести оценку действующих политик и обновить их по итогам первых месяцев.",
+            "Подтвердить достижение $50,000 выписками, без двойного учёта и завышенной оценки."
+          ],
+          deliverables: [
+            "ФП №1 и 12-месячная финансовая модель.",
+            "Резервный счёт и правило неснижаемого остатка.",
+            "Настроенный автоматический инвестиционный взнос.",
+            "Календарь и ценовые вилки продажи активов.",
+            "Карточка инвестиционной инициативы и процесс её одобрения.",
+            "Подтверждение капитала $50,000."
+          ],
+          mentor: "Собирает финансовую модель, обучает базовой логике портфеля, проверяет инициативы и удерживает дисциплину.",
+          client: "Выполняет взносы, формирует резерв, проходит обучение и реализует согласованный календарь.",
+          gate: "Капитал не менее $50,000 подтверждён; резерв отделён; минимум три взноса выполнены по утверждённому правилу.",
+          risks: ["Считать резерв инвестиционным капиталом", "Гнаться за доходностью до стабилизации потоков", "Отменять взносы без пересмотра плана"]
+        },
+        {
+          id: "capitalization",
+          title: "Капитализация",
+          capital: "$150,000",
+          obligations: "≤ $500,000",
+          reward: "$1,000–3,000",
+          status: "not-started",
+          summary: "Превращаем непрофильные и неликвидные активы в прозрачный ликвидный капитал.",
+          description: "Каждый актив проходит отдельный мини-проект продажи: подготовка документов, оценка, упаковка, поиск покупателей, переговоры и закрытие. Цель этапа — получить конкурентную цену и заранее определить, какая часть чистой выручки идёт в фонд, на обязательства и в резерв.",
+          tasks: [
+            "Составить перечень активов на продажу и определить приоритет по ликвидности, риску и потенциальной цене.",
+            "Проверить права собственности, ограничения, налоги, долги и документы по каждому активу.",
+            "Упаковать активы: тизер, финансовые данные, фотографии, подтверждения дохода и защищённая data room.",
+            "Получить независимую оценку или обоснованный ценовой коридор.",
+            "Подготовить сценарий продажи, минимально допустимую цену и полномочия на переговоры.",
+            "Создать воронку инвесторов и покупателей; фиксировать контакт, интерес, предложение и следующее действие.",
+            "Провести конкурентные переговоры, не раскрывая лишнюю информацию и не создавая конфликтов интересов.",
+            "Продать активы ориентировочно на $50,000–100,000 или выше, если рынок и документы позволяют.",
+            "Заранее утвердить водопад распределения чистой выручки между капиталом, долгами и резервом.",
+            "Внести фактически полученную чистую сумму в фонд и обновить баланс."
+          ],
+          deliverables: [
+            "Реестр активов к продаже и календарь сделок.",
+            "Data room и пакет продажи по каждому активу.",
+            "Отчёт об оценке и ценовой коридор.",
+            "Воронка покупателей и журнал предложений.",
+            "Документы закрытия сделки.",
+            "Водопад распределения и подтверждение поступления денег."
+          ],
+          mentor: "Организует процесс сделки, помогает сравнивать предложения и защищает стратегическую цель от эмоциональных решений.",
+          client: "Предоставляет документы, принимает ценовые решения, участвует в ключевых переговорах и закрывает сделку.",
+          gate: "Чистая выручка получена и распределена по утверждённому правилу; подтверждённый капитал достиг $150,000.",
+          risks: ["Продажа без проверки налогов и ограничений", "Слишком ранняя уступка в цене", "Использование выручки не по утверждённому водопаду"]
+        },
+        {
+          id: "deleveraging",
+          title: "Снижение обязательств",
+          capital: "$250,000",
+          obligations: "≤ $450,000",
+          reward: "$1,000–3,000",
+          status: "not-started",
+          summary: "Используем возвраты, продажи, взаимозачёты и цессии для системного роста чистого капитала.",
+          description: "Фокус смещается с валового размера активов на качество чистого капитала. Мы собираем выданные деньги, сравниваем продажу и обмен активов, прорабатываем зачёты и уступки прав требования. Каждое действие оценивается по тому, насколько оно сокращает риск и улучшает денежный поток.",
+          tasks: [
+            "Обновить реестр всех денег, выданных физическим лицам, проектам и компаниям.",
+            "Получить акты сверки и подтверждение задолженности по каждому возврату.",
+            "Подготовить активы к продаже или обмену на обязательства.",
+            "Проработать взаимозачёты на $50,000–100,000 там, где встречные требования подтверждены.",
+            "Проверить варианты уступки и цессии с юридической, налоговой и экономической стороны.",
+            "Сравнить делегирование части обязательств через фонды с прямым погашением.",
+            "Собрать просроченные и приближающиеся к сроку выданные средства.",
+            "Направить согласованную долю выручки от продаж на уменьшение обязательств.",
+            "Контролировать капитал, долг, чистый капитал и коэффициент покрытия как единую систему.",
+            "Зафиксировать новую структуру платежей и исключить повторное появление дорогих долгов."
+          ],
+          deliverables: [
+            "Актуальный реестр дебиторской и кредиторской задолженности.",
+            "Матрица вариантов: возврат, продажа, обмен, зачёт или цессия.",
+            "Акты сверки и юридически проверенные документы.",
+            "График получения и распределения денежных средств.",
+            "Отчёт по чистому капиталу и покрытию обязательств."
+          ],
+          mentor: "Сравнивает экономику вариантов, задаёт очередность и контролирует, чтобы сделки действительно улучшали чистый капитал.",
+          client: "Проводит переговоры, подписывает документы и обеспечивает фактическое получение или перечисление средств.",
+          gate: "Капитал достиг $250,000, обязательства снижены до $450,000 или ниже, а по просроченным суммам есть юридически исполнимый план.",
+          risks: ["Зачёт неподтверждённых требований", "Скрытые налоги и комиссии", "Рост активов при одновременном росте долга"]
+        },
+        {
+          id: "capital-safety",
+          title: "Безопасность капитала",
+          capital: "$300,000",
+          obligations: "≤ $300,000",
+          reward: "$2,000–6,000",
+          status: "not-started",
+          summary: "Защищаем накопленный капитал от концентрации, дефолта контрагента и потери ликвидности.",
+          description: "После накопления значимой суммы главный риск — не отсутствие доходности, а потеря уже созданного. Мы анализируем каждую позицию и каждого контрагента, вводим лимиты, формируем резервные сценарии и добиваемся, чтобы ликвидные средства устойчиво покрывали критические обязательства.",
+          tasks: [
+            "Провести полный анализ активов: стоимость, ликвидность, валюта, страна, доходность, срок и юридический владелец.",
+            "Разделить активы по роли: резерв, стабильный доход, рост, предпринимательский риск и стратегическое владение.",
+            "Ввести лимиты на одного контрагента, инструмент, валюту, страну и неликвидный класс.",
+            "Проверить контрагентов: лицензии, владельцы, отчётность, хранение активов, конфликт интересов и порядок вывода.",
+            "Реструктурировать займы и повторно проверить долларовые и наиболее дорогие обязательства.",
+            "Создать резервный защитный контур и стресс-сценарий, а не использовать непрозрачные конструкции.",
+            "Распределить владение между клиентом и членами семьи только при законном основании и после юридического заключения.",
+            "Провести ребалансировку и закрыть позиции, которые не имеют понятной роли.",
+            "Проверить, что ликвидные деньги устойчиво превышают критические краткосрочные обязательства.",
+            "Утвердить кризисный регламент: кто действует, при каком событии и в какой последовательности."
+          ],
+          deliverables: [
+            "Карта портфеля и роли каждого актива.",
+            "Матрица лимитов и концентраций.",
+            "Досье и рейтинг ключевых контрагентов.",
+            "План ребалансировки и отчёт исполнения.",
+            "Кризисный план и резервный контур.",
+            "Отчёт о покрытии обязательств ликвидными средствами."
+          ],
+          mentor: "Проводит независимую проверку портфеля, формирует лимиты и добивается решений до возникновения кризиса.",
+          client: "Утверждает ограничения, раскрывает договоры и исполняет ребалансировку по согласованной очередности.",
+          gate: "Капитал не ниже $300,000, обязательства не выше $300,000, портфель находится в лимитах и нет критической зависимости от одного контрагента.",
+          risks: ["Концентрация у одного управляющего", "Иллюзия ликвидности", "Отсутствие плана доступа к активам в кризис"]
+        },
+        {
+          id: "new-level",
+          title: "Новый уровень",
+          capital: "$500,000",
+          obligations: "≤ $250,000",
+          reward: "$3,000–9,000",
+          status: "not-started",
+          summary: "Переходим от набора активов к профессиональной инвестиционной системе уровня $500 тысяч и выше.",
+          description: "На этом уровне прежние правила уже недостаточны. Мы пересобираем стратегию под больший капитал, углубляем инвестиционные компетенции, создаём регулярный инвестиционный комитет и превращаем путь от $500 тысяч до $1 млн в отдельный измеримый план.",
+          tasks: [
+            "Подтвердить достижение отметки $500,000 документами и исключить двойной учёт.",
+            "Провести ретроспективу: какие источники реально создали капитал и какие действия не сработали.",
+            "Обновить стратегию и инвестиционную политику для капитала $500,000–1,000,000.",
+            "Пройти углублённое обучение по портфелю, рискам, фондам, налогам и поведению инвестора.",
+            "Подготовить пакет к созвону с управляющим: результаты, отклонения, риски и решения.",
+            "Провести стратегическую сессию с руководителем фонда и зафиксировать протокол.",
+            "Согласовать целевую аллокацию, допустимые отклонения и правила ребалансировки.",
+            "Выполнить ребалансировку траншами с контролем комиссий и ликвидности.",
+            "Создать длительную стратегию фонда и обновлённый roadmap до $1 млн.",
+            "Определить политику пассивного дохода, не разрушая темп капитализации."
+          ],
+          deliverables: [
+            "Подтверждение капитала $500,000.",
+            "Инвестиционная политика версии 2.",
+            "Целевая аллокация и коридоры отклонений.",
+            "Протокол инвестиционного комитета.",
+            "Отчёт по ребалансировке.",
+            "Roadmap от $500,000 до $1,000,000."
+          ],
+          mentor: "Организует стратегическую сессию, обновляет правила, помогает отделить доказанные драйверы от случайного результата.",
+          client: "Повышает компетенцию, утверждает новую стратегию и выполняет решения по согласованным правилам.",
+          gate: "Капитал достиг $500,000, обязательства не выше $250,000, новая политика действует и портфель приведён к целевой структуре.",
+          risks: ["Самоуверенность после роста капитала", "Резкое увеличение плеча", "Погоня за сложными продуктами без понимания"]
+        },
+        {
+          id: "legal-infrastructure",
+          title: "Легальная инфраструктура",
+          capital: "$600,000",
+          obligations: "≤ $200,000",
+          reward: "$3,000–9,000",
+          status: "not-started",
+          summary: "Делаем владение, происхождение средств и международные операции законными, понятными и устойчивыми.",
+          description: "Это этап комплаенса и архитектуры владения, а не создания сложности ради сложности. Рассматриваются трасты, LLC, банковские и брокерские счета, Европа, США, Кипр, ОАЭ и другие варианты — но структура открывается только при реальной деловой цели, письменном юридическом и налоговом заключении и полном подтверждении происхождения средств.",
+          tasks: [
+            "Построить карту текущего владения активами, счетами, долями, договорами и полномочиями.",
+            "Подготовить пакет Source of Funds / Source of Wealth и связать каждую крупную сумму с подтверждающими документами.",
+            "Определить цели структуры: защита, управление, наследование, инвестиционный доступ или операционная деятельность.",
+            "Сравнить варианты траста, LLC в США, европейских счетов, Кипра, ОАЭ и других юрисдикций по стоимости, рискам и требованиям.",
+            "Получить письменные юридические и налоговые заключения до открытия компаний и перевода средств.",
+            "Пройти AML/KYC у выбранных банков, брокеров, кастодианов и фондов.",
+            "Исключить фиктивные операции, сокрытие владения и любые незаконные способы легализации средств.",
+            "Диверсифицировать банки и провайдеров, сохранив управляемость и прозрачную отчётность.",
+            "Настроить матрицу подписей, доверенностей, доступов, паролей и аварийного восстановления.",
+            "Создать ежегодный календарь отчётности, налогов, продлений и комплаенс-проверок."
+          ],
+          deliverables: [
+            "Карта владения и движения средств.",
+            "Комплект SoF/SoW и KYC-досье.",
+            "Сравнительная записка по юрисдикциям и провайдерам.",
+            "Письменные legal и tax memo.",
+            "Матрица банков, брокеров и кастодианов.",
+            "Календарь обязательной отчётности и комплаенса."
+          ],
+          mentor: "Координирует специалистов, удерживает структуру в рамках цели и не допускает непрозрачных или необоснованных решений.",
+          client: "Полностью раскрывает факты, предоставляет документы и принимает решения только после профессиональной проверки.",
+          gate: "Структура владения объяснима банку, аудитору и семье; происхождение средств подтверждено; обязательные заключения и календарь готовы.",
+          risks: ["Открытие структуры без деловой цели", "Неполное раскрытие бенефициара", "Налоговые последствия без письменного заключения"]
+        },
+        {
+          id: "globalization",
+          title: "Глобализация",
+          capital: "$700,000",
+          obligations: "≤ $200,000",
+          reward: "$3,000–9,000",
+          status: "not-started",
+          summary: "Снижаем зависимость капитала от одной страны, валюты, команды, фонда или инфраструктурного провайдера.",
+          description: "Глобализация означает не максимальное количество счетов, а независимые источники риска и понятные правила контроля. Слияния фондов, покупка долей и новые контракты рассматриваются только после due diligence, аудита и проверки того, как решение меняет ликвидность, концентрацию и права клиента.",
+          tasks: [
+            "Провести глобальный аудит активов, обязательств, стран, валют, провайдеров и способов хранения.",
+            "Сформировать целевую глобальную аллокацию и максимально допустимые концентрации.",
+            "Оценить стратегические объединения фондов и капиталов, включая права, конфликты и механизм выхода.",
+            "Провести due diligence фондов Rate, Solid, «Москва» и 3–5 независимых внешних фондов.",
+            "Проверить аудит, команду, кастодиана, стратегию, комиссии, ликвидность и исторические просадки каждого фонда.",
+            "Покупать доли или переводить капитал траншами после прохождения инвестиционного комитета.",
+            "Провести независимую юридическую и финансовую проверку ключевых международных активов.",
+            "Заключить обновлённый контракт на управление с KPI, отчётностью, лимитами и процедурой прекращения.",
+            "Разнести критические функции между независимыми банками, брокерами, фондами и хранителями.",
+            "Собрать единый консолидированный отчёт по всему глобальному портфелю."
+          ],
+          deliverables: [
+            "Глобальный аудиторский отчёт.",
+            "Целевая аллокация по странам, валютам и классам активов.",
+            "DDQ и инвестиционные меморандумы по внешним фондам.",
+            "Протоколы инвестиционного комитета.",
+            "Новый контракт на управление.",
+            "Консолидированный отчёт до и после диверсификации."
+          ],
+          mentor: "Задаёт стандарт due diligence, сравнивает альтернативы и контролирует независимость проверок.",
+          client: "Утверждает сделки, обеспечивает документы и переводит капитал только поэтапно и после проверки.",
+          gate: "Капитал достиг $700,000; критические концентрации устранены; внешние фонды и управляющие прошли независимую проверку.",
+          risks: ["Диверсификация только по названиям", "Несколько фондов с одинаковым риском", "Неликвидные условия выхода"]
+        },
+        {
+          id: "legal-field",
+          title: "Юридическое поле",
+          capital: "$900,000",
+          obligations: "≤ $100,000",
+          reward: "$3,000–9,000",
+          status: "not-started",
+          summary: "Закрепляем права на капитал, наследование, налоговую устойчивость и непрерывность управления.",
+          description: "На отметке около $900 тысяч важна не только доходность, но и способность семьи сохранить доступ и контроль при любом сценарии. Мы формируем понятную систему владения, наследования и полномочий, проверяем налоги, кибербезопасность, доверенности, NDA и порядок восстановления доступа.",
+          tasks: [
+            "Создать финальную карту юридического владения активами и бенефициарных прав.",
+            "Проверить договоры управления, номинальные конструкции, права голоса и условия выхода.",
+            "Разработать политику наследования и согласовать её с завещаниями, трастами и семейными документами.",
+            "Определить законное размещение части средств лично на клиенте и членах семьи.",
+            "Провести налоговый аудит структуры и устранить обнаруженные пробелы.",
+            "Собрать реестр доверенностей, NDA, ключевых контрактов, контактов и сроков действия.",
+            "Настроить кибербезопасность: 2FA, аппаратные ключи, резервные коды, отдельные устройства и журнал доступа.",
+            "Создать инструкцию аварийного доступа для доверенных лиц без раскрытия лишней информации.",
+            "Проверить страхование ответственности и иные инструменты защиты, если они релевантны.",
+            "Провести учебный кризисный сценарий: потеря доступа, недееспособность, спор или блокировка провайдера."
+          ],
+          deliverables: [
+            "Финальная ownership chart.",
+            "Пакет наследственного планирования.",
+            "Налоговое заключение и календарь обязательств.",
+            "Реестр полномочий, доверенностей и договоров.",
+            "Паспорт кибербезопасности и аварийного восстановления.",
+            "Протокол учебного кризисного сценария."
+          ],
+          mentor: "Собирает общую архитектуру, координирует юристов и проверяет, что документы работают как единая система.",
+          client: "Принимает решения по владению, назначает доверенных лиц и исполняет рекомендации профильных специалистов.",
+          gate: "Права на капитал, наследование, налоги и доступ документированы; критические сценарии проверены; обязательства снижены до $100,000 или ниже.",
+          risks: ["Документы разных стран противоречат друг другу", "Один человек контролирует все доступы", "Наследственный план существует только устно"]
+        },
+        {
+          id: "victory",
+          title: "Победа и следующий шаг",
+          capital: "$1,000,000",
+          obligations: "$0",
+          reward: "$5,000–15,000",
+          status: "not-started",
+          summary: "Подтверждаем $1 млн, закрываем обязательства и превращаем достигнутый капитал в устойчивую систему жизни.",
+          description: "Финальная фаза — не фотография красивой цифры, а переход к финансовой свободе на проверяемых правилах. Капитал подтверждается независимыми документами, обязательства закрываются, портфель проходит финальный аудит. После этого создаются политика пассивного дохода, стратегия реинвестирования и отдельный исследовательский проект на $10 млн без риска для защищённого капитала.",
+          tasks: [
+            "Подтвердить капитал $1,000,000 выписками, оценками и актами сверки без двойного учёта.",
+            "Полностью закрыть обязательства или сформировать эквивалентный защищённый контур, если закрытие экономически невыгодно и законно обосновано.",
+            "Провести финальный аудит фондов Rate, Solid, «Москва» и 3–5 сторонних фондов перед увеличением долей.",
+            "Завершить юридическое оформление фонда и системы управления в требуемой степени.",
+            "Провести глобальную диверсификацию и установить постоянный контроль лимитов.",
+            "Зафиксировать неснижаемый остаток, резерв на жизнь и кризисные сценарии.",
+            "Сформулировать личное определение финансовой свободы, точки невозврата и допустимого уровня риска.",
+            "Создать стратегию жизни на пассивный доход с диапазоном безопасных изъятий.",
+            "Создать стратегию реинвестирования и ежегодной ребалансировки.",
+            "Передать клиенту полный комплект документов, инструкций, контактов и календарей.",
+            "Провести ретроспективу всего проекта: что создало капитал, что защищает его и что нельзя повторять.",
+            "Сформировать отдельный проект на $10 млн с 90-дневной исследовательской фазой и личным курированием."
+          ],
+          deliverables: [
+            "Независимое подтверждение капитала $1 млн.",
+            "Подтверждение закрытия обязательств.",
+            "Финальный инвестиционный и юридический аудит.",
+            "Политика пассивного дохода и неснижаемого остатка.",
+            "Стратегия реинвестирования и ежегодного контроля.",
+            "Полный паспорт капитала для клиента и семьи.",
+            "Паспорт следующего проекта на $10 млн."
+          ],
+          mentor: "Проводит финальную верификацию, помогает превратить результат в устойчивую систему и отделяет новый риск от защищённого капитала.",
+          client: "Подтверждает достижение, принимает долгосрочные правила и формулирует следующий жизненный и финансовый горизонт.",
+          gate: "Подтверждённый чистый капитал не ниже $1,000,000, обязательства равны нулю, система управления и защиты работает без ручного героизма.",
+          risks: ["Считать цель достигнутой по неподтверждённым оценкам", "Начать проект $10 млн с чрезмерным плечом", "Размыть защищённый капитал новыми экспериментами"]
+        }
+      ];
+
+      function prepareDefaultPhases() {
+        var byId = Object.fromEntries(defaultPhases.map(function (phase) { return [phase.id, phase]; }));
+
+        Object.assign(byId.foundation, {
+          capital: "$100,000",
+          obligations: "≤ $350,000",
+          status: "not-started",
+          summary: "Собрать финансовую систему и снизить обязательства до $350,000.",
+          description: "Объединённый этап «Фундамент + безопасность обязательств». Сначала выстраиваем финансовую систему, затем приводим займы, сроки и валютные риски к понятному плану.",
+          tasks: [
+            { text: "Создана финансовая модель по доходу на 2026 год.", done: true },
+            { text: "Сформирован план по обязательствам и лесенка возвратов.", done: true },
+            { text: "Сформирован детальный план действий по пролонгированию.", done: true },
+            { text: "Созданы и выстроены все необходимые финансовые потоки.", done: true },
+            { text: "Создана структура фонда «Сэйф», фонд передан в управление.", done: false },
+            { text: "Создана структура фонда Rate, фонд передан в управление.", done: false },
+            { text: "Все займы с процентной ставкой свыше 25% реинвестированы.", done: false },
+            { text: "Все займы с валютным риском реинвестированы или хеджированы.", done: false },
+            { text: "Все займы пролонгированы в соответствии с планом.", done: true },
+            { text: "Проценты, сроки и суммы по каждому займу оптимизированы точечно.", done: true },
+            { text: "Общая сумма обязательств снижена до $350,000.", done: false }
+          ],
+          deliverables: [
+            "Финансовая модель на 2026 год.",
+            "Лесенка возвратов и план пролонгаций.",
+            "Структура фондов «Сэйф» и Rate.",
+            "Обновлённый реестр займов и обязательств."
+          ],
+          gate: "Все 11 задач закрыты. Капитал — $100,000. Обязательства — не выше $350,000."
+        });
+
+        Object.assign(byId.capitalization, {
+          capital: "$150,000",
+          obligations: "≤ $250,000",
+          summary: "Продать актив за $150,000 и направить $150,000 в капитал.",
+          description: "Второй цикл: подготовка актива, продажа и направление денег в капитал.",
+          tasks: [
+            "Выбран следующий актив для продажи.",
+            "Актив подготовлен и упакован для покупателя.",
+            "Определена цена и условия сделки.",
+            "Проведены переговоры с покупателем и согласованы документы.",
+            "Актив продан за $150,000.",
+            "$150,000 направлены в капитал.",
+            "Обязательства снижены до $250,000."
+          ],
+          deliverables: ["Закрытая сделка по продаже доли.", "Подтверждение поступления денег.", "Обновлённый баланс капитала и обязательств."],
+          gate: "Актив продан за $150,000. Капитал — $150,000. Обязательства — не выше $250,000."
+        });
+
+        Object.assign(byId.deleveraging, {
+          capital: "$50,000",
+          obligations: "≤ $400,000",
+          summary: "Продать активы на $150,000 и направить $150,000 на обязательства.",
+          description: "Подготовить активы, закрыть продажу и направить деньги на обязательства.",
+          tasks: [
+            "Выбраны активы для продажи.",
+            "Активы подготовлены к продаже.",
+            "Проведена оценка и определена цена.",
+            "Проведены переговоры с покупателями и согласованы условия.",
+            "Активы проданы на $150,000.",
+            "$150,000 направлены на снижение обязательств.",
+            "Снижение обязательств подтверждено."
+          ],
+          deliverables: ["Закрытая сделка на $150,000.", "Подтверждение снижения обязательств.", "Обновлённый баланс проекта."],
+          gate: "Активы проданы на $150,000. Капитал — $50,000. Обязательства — не выше $400,000."
+        });
+
+        Object.assign(byId["first-money"], {
+          capital: "$150,000",
+          obligations: "≤ $250,000",
+          summary: "Проверить и сбалансировать все финансовые потоки.",
+          description: "Обновить финансовый план, разобрать потоки и запустить регулярные отчисления.",
+          tasks: [
+            "Обновить личный финансовый план.",
+            "Создать ФП №1.",
+            "Создать личную инвестиционную директиву.",
+            "Разобрать все финансовые потоки и каждому дать направление.",
+            "Создать резервный фонд и зафиксировать отчисления.",
+            "Настроить регулярные отчисления в фонд SAFE.",
+            "Запустить фонд инвестиционных инициатив.",
+            "Провести базовое обучение по инвестиционной стратегии."
+          ],
+          deliverables: ["Обновлённый ФП №1.", "Запущенный фонд резервов.", "Зафиксированный неснижаемый остаток.", "Регламент взносов."],
+          gate: "Финансовый план обновлён. Все потоки имеют направление. Резервный фонд и регулярные отчисления в SAFE запущены."
+        });
+
+        Object.assign(byId["capital-safety"], {
+          capital: "$250,000",
+          obligations: "≤ $250,000",
+          summary: "Провести ребалансировку активов между контрагентами, повысить уровень безопасности и создать кризисный план.",
+          description: "Когда капитал и обязательства сближаются на уровне $250,000, повторно проверяем финансовую систему, активы, договоры и защитные сценарии.",
+          tasks: [
+            "Повторить цикл, сделанный в «Фундаменте»: план по обязательствам и лестница возвратов.",
+            "Провести анализ всех активов и контрагентов.",
+            "Разделить активы по ролям и ликвидности.",
+            "Проверить договоры и способы хранения.",
+            "Создать контракт SAFE с управляющим.",
+            "Провести ребалансировку активов по людям и структурам владения.",
+            "Утвердить кризисный план для разных сценариев."
+          ],
+          deliverables: ["Обновлённый план по обязательствам и лесенка возвратов.", "Карта портфеля.", "Контракты Rate и SAFE с управляющим.", "План ребалансировки и кризисный регламент."],
+          gate: "Капитал — $250,000. Обязательства — не выше $250,000. Ребалансировка проведена, контракт SAFE подписан, кризисный план утверждён."
+        });
+
+        Object.assign(byId["new-level"], {
+          capital: "$500,000",
+          obligations: "≤ $250,000",
+          summary: "Довести капитал до $500,000, обновить стратегию и провести встречу с управляющим.",
+          description: "Переходим к регулярному инвестиционному комитету и профессиональным правилам управления.",
+          tasks: [
+            "Провести углублённое обучение по инвестициям.",
+            "Обновить roadmap до $1 млн.",
+            "Провести встречу с управляющим.",
+            "Получить полный анализ активов.",
+            "Получить заключение по каждому активу.",
+            "Обновить инвестиционную стратегию."
+          ],
+          deliverables: ["Стратегия версии 2.", "Целевая аллокация.", "Протокол инвестиционного комитета."],
+          gate: "Капитал — $500,000. Обязательства — не выше $250,000. Стратегия обновлена, встреча с управляющим проведена."
+        });
+
+        Object.assign(byId["legal-infrastructure"], {
+          title: "Легальная структура",
+          capital: "$700,000",
+          obligations: "≤ $200,000",
+          summary: "Создать точный план по перемещению и легализации активов.",
+          description: "Собираем подтверждающие документы, выбираем банки и юридическую конструкцию, после чего запускаем легализацию по согласованному плану.",
+          tasks: [
+            "Построить карту владения активами.",
+            "Подготовить пакет документов и подтверждений происхождения средств.",
+            "Сравнить банки и компании для структуры.",
+            "Построить точный план проекта «Юридическое поле».",
+            "Запустить процесс легализации активов."
+          ],
+          deliverables: ["Карта владения.", "Комплект SoF/SoW.", "Legal и tax memo.", "Календарь комплаенса."],
+          gate: "Капитал — $700,000. Обязательства — не выше $200,000. План легализации создан, процесс легализации активов запущен."
+        });
+
+        Object.assign(byId.globalization, {
+          capital: "$800,000",
+          obligations: "≤ $150,000",
+          summary: "Распределяем капитал между независимыми странами, валютами, фондами и провайдерами.",
+          description: "Каждое новое направление проходит проверку до перевода денег.",
+          tasks: [
+            "Провести глобальный аудит портфеля.",
+            "Сформировать целевую аллокацию.",
+            "Проверить фонды Rate, Solid, «Москва» и внешние фонды.",
+            "Обновить контракт на управление.",
+            "Перевести капитал траншами."
+          ],
+          deliverables: ["Глобальный аудит.", "Целевая аллокация.", "Заключения по фондам.", "Новый договор управления."],
+          gate: "Критические концентрации устранены, новые фонды прошли проверку."
+        });
+
+        Object.assign(byId["legal-field"], {
+          capital: "$750,000",
+          obligations: "≤ $100,000",
+          summary: "Создать trust, наследственный план, доверенности и аварийный доступ.",
+          description: "Создаём юридический контур, который защищает капитал при наследовании, потере доступа, споре или смене управляющего.",
+          tasks: [
+            "Завершить карту юридического владения.",
+            "Создать trust и определить правила его управления.",
+            "Создать наследственный план и комплект распоряжений.",
+            "Провести налоговый аудит.",
+            "Создать доверенности на ключевые юридические и финансовые действия.",
+            "Проверить договоры с управляющими, банками и фондами.",
+            "Сформировать аварийный пакет доступа для семьи и доверенных лиц.",
+            "Застраховать капитал и жизнь владельцев."
+          ],
+          deliverables: ["Финальная ownership chart.", "Trust и регламент управления.", "Наследственный пакет.", "Комплект доверенностей.", "Налоговое заключение.", "Паспорт безопасности."],
+          gate: "Капитал — $750,000. Обязательства — не выше $100,000. Trust, наследственный план, доверенности и страхование капитала и жизни оформлены."
+        });
+
+        Object.assign(byId.victory, {
+          title: "Победа и следующий шаг",
+          capital: "$1,000,000",
+          obligations: "$0",
+          summary: "Довести капитал до $1,000,000, закрыть обязательства и создать проект на $10,000,000.",
+          description: "Финальная консолидация активов, фиксация результата и запуск следующего проекта.",
+          tasks: [
+            "Провести финальную верификацию активов.",
+            "Провести финальные продажи, слияния и цессии.",
+            "Довести капитал до $1,000,000.",
+            "Подтвердить капитал $1,000,000.",
+            "Полностью закрыть обязательства.",
+            "Утвердить пассивный доход и правила его получения.",
+            "Переподписать контракт с управляющим.",
+            "Отделить защищённый капитал от капитала роста.",
+            "Определить цель и срок следующего проекта.",
+            "Создать новый проект на $10,000,000."
+          ],
+          deliverables: ["Подтверждение капитала $1 млн.", "Подтверждение нулевых обязательств.", "Политика пассивного дохода.", "Паспорт капитала.", "Паспорт цели $10 млн.", "Отдельный риск-бюджет.", "90-дневный план."],
+          gate: "Капитал — $1,000,000. Обязательства — $0. Правила пассивного дохода утверждены, контракт с управляющим подписан, проект $10,000,000 создан и имеет план."
+        });
+
+        var capitalizationTwo = {
+          id: "capitalization-2",
+          title: "Капитализация II",
+          capital: "$700,000",
+          obligations: "≤ $200,000",
+          status: "not-started",
+          summary: "Продать активы на $200,000 и направить $200,000 в капитал.",
+          description: "Отдельный цикл продажи активов после достижения уровня $500,000.",
+          tasks: [
+            "Выбрать активы для продажи.",
+            "Подготовить активы и документы к сделке.",
+            "Провести переговоры с покупателем и согласовать условия.",
+            "Продать активы на $200,000.",
+            "Направить $200,000 в капитал.",
+            "Подтвердить капитал $700,000."
+          ],
+          deliverables: [],
+          gate: "Активы проданы на $200,000. Капитал — $700,000. Обязательства — не выше $200,000."
+        };
+
+        [byId.foundation, byId.deleveraging, byId.capitalization].forEach(function (phase) {
+          phase.tasks = (phase.tasks || []).map(function (item) {
+            return { text: typeof item === "string" ? item : String(item.text || ""), done: true };
+          });
+        });
+
+        defaultPhases = [
+          byId.foundation,
+          byId.deleveraging,
+          byId.capitalization,
+          byId["first-money"],
+          byId["capital-safety"],
+          byId["new-level"],
+          capitalizationTwo,
+          byId["legal-infrastructure"],
+          byId["legal-field"],
+          byId.victory
+        ];
+      }
+
+      prepareDefaultPhases();
+
+      function defaultState() {
+        return {
+          version: 1,
+          project: {
+            title: "Цель",
+            subtitle: "Довести чистый капитал Георгия Чеботка до $1,000,000, полностью закрыть обязательства, юридически оформить и защитить структуру владения, закрепить страхование и профессиональное управление капиталом.",
+            goal: "$1,000,000"
+          },
+          settings: {
+            theme: "light",
+            density: "comfortable",
+            font: "modern",
+            fontSize: "medium",
+            depth: "soft",
+            radiusPreset: 22,
+            workspaceWidth: 1080,
+            sidebarWidth: 220,
+            cardPadding: 30,
+            cardGap: 22
+          },
+          ui: { collapsed: [], revealedCompleted: [] },
+          phases: JSON.parse(JSON.stringify(defaultPhases))
+        };
+      }
+
+      function loadState() {
+        try {
+          var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+          if (saved && Array.isArray(saved.phases) && saved.phases.length) {
+            saved.ui = saved.ui || {};
+            saved.ui.collapsed = saved.ui.collapsed || [];
+            saved.ui.revealedCompleted = saved.ui.revealedCompleted || [];
+            return saved;
+          }
+        } catch (error) {}
+        return defaultState();
+      }
+
+      var state = loadState();
+      var editingId = null;
+      var toastTimer = null;
+
+      var timeline = document.getElementById("timeline");
+      var phaseNav = document.getElementById("phaseNav");
+      var completedStages = document.getElementById("completedStages");
+      var editPickerDialog = document.getElementById("editPickerDialog");
+      var editPhaseList = document.getElementById("editPhaseList");
+      var phaseDialog = document.getElementById("phaseDialog");
+      var phaseForm = document.getElementById("phaseForm");
+      var settingsDialog = document.getElementById("settingsDialog");
+      var settingsForm = document.getElementById("settingsForm");
+      var importInput = document.getElementById("importInput");
+
+      function escapeHtml(value) {
+        return String(value == null ? "" : value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function lines(value) {
+        return String(value || "").split(/\r?\n/).map(function (item) { return item.trim(); }).filter(Boolean);
+      }
+
+      function safeId() {
+        if (window.crypto && crypto.randomUUID) return "phase-" + crypto.randomUUID().replace(/-/g, "");
+        return "phase-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+      }
+
+      function saveState(message) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          var time = new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+          document.getElementById("saveState").textContent = "Сохранено в " + time;
+          if (message) showToast(message);
+        } catch (error) {
+          showToast("Не удалось сохранить изменения в браузере");
+        }
+      }
+
+      function showToast(message) {
+        var toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("visible");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toast.classList.remove("visible"); }, 2400);
+      }
+
+      function taskText(item) {
+        return typeof item === "string" ? item : String(item && item.text || "");
+      }
+
+      function taskDone(item) {
+        return typeof item === "object" && Boolean(item && item.done);
+      }
+
+      function phaseStats(phase) {
+        var tasks = phase.tasks || [];
+        var done = tasks.filter(taskDone).length;
+        var percent = tasks.length ? Math.round(done / tasks.length * 100) : 0;
+        return { total: tasks.length, done: done, percent: percent, complete: tasks.length > 0 && done === tasks.length };
+      }
+
+      function taskListHtml(phase) {
+        var tasks = phase.tasks || [];
+        var done = tasks.filter(taskDone).length;
+        var percent = tasks.length ? Math.round(done / tasks.length * 100) : 0;
+        var items = tasks.map(function (item, taskIndex) {
+          var checked = taskDone(item);
+          return '<li><label class="task-item' + (checked ? " done" : "") + '"><input type="checkbox" data-action="task" data-task-index="' + taskIndex + '"' + (checked ? " checked" : "") + '><span>' + escapeHtml(taskText(item)) + "</span></label></li>";
+        }).join("");
+        return '<ul class="task-list">' + items + '</ul><p class="task-progress">' + done + " из " + tasks.length + " · " + percent + "%</p>";
+      }
+
+      function cardHtml(phase, index) {
+        var color = PHASE_COLORS[index % PHASE_COLORS.length];
+        var stats = phaseStats(phase);
+        return [
+          '<article class="phase-card', stats.complete ? " is-complete" : "", '" id="phase-', escapeHtml(phase.id), '" data-id="', escapeHtml(phase.id), '" style="--phase-accent:', color, '">',
+          '<span class="phase-index">', String(index + 1).padStart(2, "0"), "</span>",
+          '<div class="phase-head">',
+          '<div class="phase-topline"><span class="phase-label">Этап ', String(index + 1).padStart(2, "0"), '</span><span class="phase-progress-badge">', stats.percent, '%</span></div>',
+          '<div class="phase-title-row"><h3>', escapeHtml(phase.title), '</h3></div>',
+          '<div class="goal-block"><span>Цель проекта</span><strong>', escapeHtml(phase.summary), '</strong></div>',
+          '<div class="numbers">',
+          '<div class="number"><span>Капитал</span><strong>', escapeHtml(phase.capital), "</strong></div>",
+          '<div class="number"><span>Обязательства</span><strong>', escapeHtml(phase.obligations), "</strong></div>",
+          "</div></div>",
+          '<div class="phase-detail">',
+          '<section class="detail-block"><h4>Что конкретно делаем</h4>', taskListHtml(phase), "</section>",
+          '<div class="gate"><strong>Критерий завершения этапа</strong><p>', escapeHtml(phase.gate), "</p></div>",
+          "</div></article>"
+        ].join("");
+      }
+
+      function applyAppearance(settings) {
+        settings = settings || {};
+        document.body.dataset.theme = settings.theme || "light";
+        document.body.dataset.density = settings.density || "comfortable";
+        document.body.dataset.font = settings.font || "modern";
+        document.body.dataset.fontSize = settings.fontSize || "medium";
+        document.body.dataset.depth = settings.depth || "soft";
+        document.body.style.setProperty("--workspace-width", (Number(settings.workspaceWidth) || 1080) + "px");
+        document.body.style.setProperty("--sidebar-width", (Number(settings.sidebarWidth) || 220) + "px");
+        document.body.style.setProperty("--card-padding", (Number(settings.cardPadding) || 30) + "px");
+        document.body.style.setProperty("--card-gap", (Number(settings.cardGap) || 22) + "px");
+        document.body.style.setProperty("--radius", (Number(settings.radiusPreset) || 22) + "px");
+      }
+
+      function renderHeader() {
+        applyAppearance(state.settings);
+        document.getElementById("projectTitle").textContent = state.project.title;
+        document.getElementById("sidebarTitle").textContent = "Дашборд капитала";
+        document.getElementById("projectSubtitle").textContent = state.project.subtitle;
+        var projectGoal = document.getElementById("projectGoal");
+        var phaseCount = document.getElementById("phaseCount");
+        if (projectGoal) projectGoal.textContent = state.project.goal;
+        if (phaseCount) phaseCount.textContent = String(state.phases.length);
+        document.title = "Capital OS — " + state.project.title;
+      }
+
+      function renderProgress() {
+        var total = state.phases.reduce(function (sum, phase) { return sum + (phase.tasks || []).length; }, 0);
+        var done = state.phases.reduce(function (sum, phase) { return sum + (phase.tasks || []).filter(taskDone).length; }, 0);
+        var percent = total ? Math.round(done / total * 100) : 0;
+        document.getElementById("progressValue").textContent = percent + "%";
+        document.getElementById("progressFill").style.width = percent + "%";
+        document.getElementById("progressNote").textContent = done + " из " + total + " задач";
+      }
+
+      function renderNav() {
+        phaseNav.innerHTML = state.phases.map(function (phase, index) {
+          var stats = phaseStats(phase);
+          return '<li data-nav-id="' + escapeHtml(phase.id) + '"><a class="' + (stats.complete ? "is-complete" : "") + '" href="#phase-' + escapeHtml(phase.id) + '"><span class="nav-dot">' + (index + 1) + '</span><span>' + escapeHtml(phase.title) + '</span><span class="nav-capital">' + escapeHtml(phase.capital) + "</span></a></li>";
+        }).join("");
+      }
+
+      function renderCompletedStages() {
+        var completed = state.phases.filter(function (phase) { return phaseStats(phase).complete; });
+        completedStages.hidden = completed.length === 0;
+        completedStages.innerHTML = completed.length ? '<span>Завершено</span>' + completed.map(function (phase) {
+          var isOpen = state.ui.revealedCompleted.indexOf(phase.id) >= 0;
+          return '<button class="completed-chip' + (isOpen ? " is-open" : "") + '" type="button" data-action="toggle-completed" data-phase-id="' + escapeHtml(phase.id) + '" aria-pressed="' + String(isOpen) + '"><span>' + escapeHtml(phase.title) + '</span><strong>100%</strong></button>';
+        }).join("") : "";
+      }
+
+      function renderAll() {
+        renderHeader();
+        renderProgress();
+        renderNav();
+        renderCompletedStages();
+        timeline.innerHTML = state.phases.map(function (phase, index) {
+          var hiddenCompleted = phaseStats(phase).complete && state.ui.revealedCompleted.indexOf(phase.id) < 0;
+          return hiddenCompleted ? "" : cardHtml(phase, index);
+        }).join("");
+        observeCards();
+      }
+
+      function findPhase(id) {
+        return state.phases.find(function (phase) { return phase.id === id; });
+      }
+
+      function cardIdFrom(target) {
+        var card = target.closest(".phase-card");
+        return card ? card.dataset.id : null;
+      }
+
+      function togglePhase(id) {
+        var index = state.ui.collapsed.indexOf(id);
+        if (index >= 0) state.ui.collapsed.splice(index, 1);
+        else state.ui.collapsed.push(id);
+        saveState();
+        renderAll();
+      }
+
+      function movePhase(id, delta) {
+        var index = state.phases.findIndex(function (phase) { return phase.id === id; });
+        var next = index + delta;
+        if (index < 0 || next < 0 || next >= state.phases.length) return;
+        var item = state.phases.splice(index, 1)[0];
+        state.phases.splice(next, 0, item);
+        saveState("Порядок этапов изменён");
+        renderAll();
+        document.getElementById("phase-" + id).scrollIntoView({ block: "center" });
+      }
+
+      function toggleCompleted(id) {
+        var index = state.ui.revealedCompleted.indexOf(id);
+        if (index >= 0) state.ui.revealedCompleted.splice(index, 1);
+        else state.ui.revealedCompleted.push(id);
+        saveState();
+        renderAll();
+        if (index < 0) {
+          setTimeout(function () {
+            var card = document.getElementById("phase-" + id);
+            if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 0);
+        }
+      }
+
+      function duplicatePhase(id) {
+        var index = state.phases.findIndex(function (phase) { return phase.id === id; });
+        if (index < 0) return;
+        var copy = JSON.parse(JSON.stringify(state.phases[index]));
+        copy.id = safeId();
+        copy.title = copy.title + " — копия";
+        copy.status = "not-started";
+        state.phases.splice(index + 1, 0, copy);
+        saveState("Этап продублирован");
+        renderAll();
+      }
+
+      function deletePhase(id) {
+        var phase = findPhase(id);
+        if (!phase || !window.confirm("Удалить этап «" + phase.title + "»?")) return;
+        state.phases = state.phases.filter(function (item) { return item.id !== id; });
+        state.ui.collapsed = state.ui.collapsed.filter(function (item) { return item !== id; });
+        saveState("Этап удалён");
+        renderAll();
+      }
+
+      function setFormValue(form, name, value) {
+        var field = form.elements.namedItem(name);
+        if (field) field.value = value == null ? "" : value;
+      }
+
+      function openEditor(id) {
+        editingId = id;
+        var phase = id ? findPhase(id) : {
+          title: "Новый этап",
+          capital: "",
+          obligations: "",
+          summary: "",
+          tasks: [],
+          gate: ""
+        };
+        document.getElementById("phaseDialogTitle").textContent = id ? "Редактировать этап" : "Добавить этап";
+        ["title", "capital", "obligations", "summary", "gate"].forEach(function (name) {
+          setFormValue(phaseForm, name, phase[name]);
+        });
+        setFormValue(phaseForm, "tasks", (phase.tasks || []).map(taskText).join("\n"));
+        phaseDialog.showModal();
+        document.body.classList.add("modal-open");
+        setTimeout(function () { phaseForm.elements.namedItem("title").focus(); }, 0);
+      }
+
+      function renderEditPicker() {
+        editPhaseList.innerHTML = state.phases.map(function (phase, index) {
+          return [
+            '<div class="edit-phase-row">',
+            '<button class="edit-phase-button" type="button" data-action="edit-phase" data-phase-id="', escapeHtml(phase.id), '">',
+            '<span class="nav-dot">', index + 1, '</span>',
+            '<span><strong>', escapeHtml(phase.title), '</strong><small>', escapeHtml(phase.capital), ' · ', escapeHtml(phase.obligations), '</small></span>',
+            '<b aria-hidden="true"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12.4 2.8a2 2 0 0 1 2.8 2.8L6.4 14.4 2.5 15.5l1.1-3.9 8.8-8.8Z"/><path d="m11.1 4.1 2.8 2.8"/></svg></b></button>',
+            '<span class="edit-order">',
+            '<button class="icon-btn" type="button" data-action="move-phase" data-phase-id="', escapeHtml(phase.id), '" data-delta="-1" aria-label="Поднять этап"', index === 0 ? " disabled" : "", '>↑</button>',
+            '<button class="icon-btn" type="button" data-action="move-phase" data-phase-id="', escapeHtml(phase.id), '" data-delta="1" aria-label="Опустить этап"', index === state.phases.length - 1 ? " disabled" : "", '>↓</button>',
+            '</span></div>'
+          ].join("");
+        }).join("");
+      }
+
+      function openEditPicker() {
+        renderEditPicker();
+        editPickerDialog.showModal();
+        document.body.classList.add("modal-open");
+      }
+
+      function closeDialog(dialog) {
+        if (dialog === settingsDialog) restoreSavedAppearance();
+        dialog.close();
+        document.body.classList.remove("modal-open");
+      }
+
+      function restoreSavedAppearance() {
+        applyAppearance(state.settings);
+      }
+
+      function updateRangeOutputs() {
+        [
+          ["workspaceWidth", "settingsWidthValue"],
+          ["sidebarWidth", "settingsSidebarWidthValue"],
+          ["cardPadding", "settingsCardPaddingValue"],
+          ["cardGap", "settingsCardGapValue"]
+        ].forEach(function (pair) {
+          var field = settingsForm.elements.namedItem(pair[0]);
+          var output = document.getElementById(pair[1]);
+          if (field && output) output.textContent = field.value + " px";
+        });
+      }
+
+      function settingsFromForm() {
+        var formData = new FormData(settingsForm);
+        return {
+          theme: String(formData.get("theme") || "light"),
+          density: String(formData.get("density") || "comfortable"),
+          font: String(formData.get("font") || "modern"),
+          fontSize: String(formData.get("fontSize") || "medium"),
+          depth: String(formData.get("depth") || "soft"),
+          radiusPreset: Number(formData.get("radiusPreset") || 22),
+          workspaceWidth: Number(formData.get("workspaceWidth") || 1080),
+          sidebarWidth: Number(formData.get("sidebarWidth") || 220),
+          cardPadding: Number(formData.get("cardPadding") || 30),
+          cardGap: Number(formData.get("cardGap") || 22)
+        };
+      }
+
+      function openSettings() {
+        setFormValue(settingsForm, "projectTitle", state.project.title);
+        setFormValue(settingsForm, "projectSubtitle", state.project.subtitle);
+        setFormValue(settingsForm, "density", state.settings.density);
+        setFormValue(settingsForm, "font", state.settings.font || "modern");
+        setFormValue(settingsForm, "fontSize", state.settings.fontSize || "medium");
+        setFormValue(settingsForm, "depth", state.settings.depth || "soft");
+        setFormValue(settingsForm, "radiusPreset", state.settings.radiusPreset || 22);
+        setFormValue(settingsForm, "workspaceWidth", state.settings.workspaceWidth || 1080);
+        setFormValue(settingsForm, "sidebarWidth", state.settings.sidebarWidth || 220);
+        setFormValue(settingsForm, "cardPadding", state.settings.cardPadding || 30);
+        setFormValue(settingsForm, "cardGap", state.settings.cardGap || 22);
+        var theme = settingsForm.querySelector('input[name="theme"][value="' + state.settings.theme + '"]');
+        if (theme) theme.checked = true;
+        updateRangeOutputs();
+        settingsDialog.showModal();
+        document.body.classList.add("modal-open");
+      }
+
+      function applySearch() {
+        var query = (searchInput.value || "").trim().toLowerCase();
+        var visible = 0;
+        state.phases.forEach(function (phase) {
+          var haystack = [phase.title, phase.summary, phase.description, phase.capital, phase.obligations]
+            .concat(phase.tasks || [], phase.deliverables || [])
+            .join(" ").toLowerCase();
+          var match = !query || haystack.indexOf(query) >= 0;
+          var card = document.getElementById("phase-" + phase.id);
+          var navItem = phaseNav.querySelector('[data-nav-id="' + phase.id + '"]');
+          if (card) card.classList.toggle("is-filtered", !match);
+          if (navItem) navItem.hidden = !match;
+          if (match) visible += 1;
+        });
+        document.getElementById("emptySearch").hidden = visible !== 0;
+      }
+
+      var observer = null;
+      function observeCards() {
+        if (!("IntersectionObserver" in window)) return;
+        if (observer) observer.disconnect();
+        observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            phaseNav.querySelectorAll("a").forEach(function (link) { link.classList.remove("active"); });
+            var active = phaseNav.querySelector('a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add("active");
+          });
+        }, { rootMargin: "-18% 0px -68% 0px", threshold: .01 });
+        timeline.querySelectorAll(".phase-card").forEach(function (card) { observer.observe(card); });
+      }
+
+      function reorderDragged(targetId, placeAfter) {
+        if (!draggedId || draggedId === targetId) return;
+        var from = state.phases.findIndex(function (phase) { return phase.id === draggedId; });
+        var target = state.phases.findIndex(function (phase) { return phase.id === targetId; });
+        if (from < 0 || target < 0) return;
+        var moved = state.phases.splice(from, 1)[0];
+        if (from < target) target -= 1;
+        var insertAt = target + (placeAfter ? 1 : 0);
+        state.phases.splice(insertAt, 0, moved);
+        saveState("Порядок этапов изменён");
+        renderAll();
+      }
+
+      function exportData() {
+        var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = "capital-os-workspace.json";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 0);
+        showToast("Резервная копия скачана");
+      }
+
+      document.addEventListener("click", function (event) {
+        var actionTarget = event.target.closest("[data-action]");
+        if (!actionTarget) return;
+        var action = actionTarget.dataset.action;
+        var id = cardIdFrom(actionTarget);
+        if (action === "add-phase") openEditor(null);
+        if (action === "settings") openSettings();
+        if (action === "toggle-completed") toggleCompleted(actionTarget.dataset.phaseId);
+        if (action === "edit-workspace") openEditPicker();
+        if (action === "edit-phase") {
+          closeDialog(editPickerDialog);
+          openEditor(actionTarget.dataset.phaseId);
+        }
+        if (action === "move-phase") {
+          movePhase(actionTarget.dataset.phaseId, Number(actionTarget.dataset.delta));
+          renderEditPicker();
+        }
+        if (action === "close-edit-picker") closeDialog(editPickerDialog);
+        if (action === "close-editor") closeDialog(phaseDialog);
+        if (action === "close-settings") closeDialog(settingsDialog);
+        if (action === "export-data") exportData();
+        if (action === "import-data") importInput.click();
+      });
+
+      timeline.addEventListener("change", function (event) {
+        var id = cardIdFrom(event.target);
+        var phase = findPhase(id);
+        if (!phase) return;
+        if (event.target.dataset.action === "task") {
+          var taskIndex = Number(event.target.dataset.taskIndex);
+          var current = phase.tasks[taskIndex];
+          phase.tasks[taskIndex] = { text: taskText(current), done: event.target.checked };
+          saveState("Задача обновлена");
+          renderAll();
+          return;
+        }
+      });
+
+      phaseForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var formData = new FormData(phaseForm);
+        var values = Object.fromEntries(formData.entries());
+        var phase = editingId ? findPhase(editingId) : { id: safeId() };
+        phase.title = values.title.trim();
+        phase.capital = values.capital.trim();
+        phase.obligations = values.obligations.trim();
+        phase.summary = values.summary.trim();
+        var previousTaskState = new Map((phase.tasks || []).map(function (item) { return [taskText(item), taskDone(item)]; }));
+        phase.tasks = lines(values.tasks).map(function (text) { return { text: text, done: previousTaskState.get(text) || false }; });
+        phase.gate = values.gate.trim();
+        if (!editingId) state.phases.push(phase);
+        saveState(editingId ? "Этап обновлён" : "Новый этап добавлен");
+        closeDialog(phaseDialog);
+        renderAll();
+        setTimeout(function () {
+          var card = document.getElementById("phase-" + phase.id);
+          if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 0);
+      });
+
+      settingsForm.addEventListener("change", function (event) {
+        updateRangeOutputs();
+        applyAppearance(settingsFromForm());
+      });
+
+      settingsForm.addEventListener("input", function (event) {
+        if (event.target.type !== "range") return;
+        updateRangeOutputs();
+        applyAppearance(settingsFromForm());
+      });
+
+      settingsForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var formData = new FormData(settingsForm);
+        state.project.title = String(formData.get("projectTitle") || "").trim() || "Цель";
+        state.project.subtitle = String(formData.get("projectSubtitle") || "").trim();
+        state.settings = settingsFromForm();
+        saveState("Настройки сохранены");
+        closeDialog(settingsDialog);
+        renderAll();
+      });
+
+      importInput.addEventListener("change", function () {
+        var file = importInput.files && importInput.files[0];
+        if (!file) return;
+        file.text().then(function (text) {
+          var imported = JSON.parse(text);
+          if (!imported || !Array.isArray(imported.phases)) throw new Error("Неверный формат");
+          state = imported;
+          saveState("Рабочее пространство загружено");
+          closeDialog(settingsDialog);
+          renderAll();
+        }).catch(function () {
+          showToast("Не удалось загрузить файл данных");
+        }).finally(function () {
+          importInput.value = "";
+        });
+      });
+
+      [editPickerDialog, phaseDialog, settingsDialog].forEach(function (dialog) {
+        dialog.addEventListener("click", function (event) {
+          if (event.target === dialog) closeDialog(dialog);
+        });
+        dialog.addEventListener("close", function () {
+          document.body.classList.remove("modal-open");
+        });
+      });
+
+      settingsDialog.addEventListener("close", restoreSavedAppearance);
+
+      renderAll();
+    })();
+  </script>
+</body>
+</html>
