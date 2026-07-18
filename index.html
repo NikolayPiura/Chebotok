@@ -25,8 +25,8 @@
       --shadow: 0 20px 55px rgba(16, 24, 40, .09);
       --radius: 22px;
       --card-gap: 22px;
-      --workspace-width: 1080px;
-      --sidebar-width: 220px;
+      --workspace-width: 1240px;
+      --sidebar-width: 320px;
       --card-padding: 30px;
       --text-scale: 1;
       --font-stack: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -337,7 +337,7 @@
       width: var(--sidebar-width);
       max-height: none;
       overflow: auto;
-      padding: 22px 15px;
+      padding: 22px 18px 28px;
       background: var(--surface);
       border: 0;
       border-right: 1px solid var(--line);
@@ -346,22 +346,22 @@
     }
 
     .sidebar h2 {
-      margin: 0;
-      font-size: calc(22px * var(--text-scale));
+      margin: 0 0 14px;
+      font-size: 24px;
       line-height: 1.05;
       letter-spacing: -.035em;
     }
 
     .progress-row {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 7px;
+      margin-bottom: 9px;
     }
 
-    .progress-row strong { font-size: 26px; letter-spacing: -.04em; }
-    .progress-row span { color: var(--muted); font-size: 11px; }
+    .progress-row strong { font-size: 29px; letter-spacing: -.04em; }
+    .progress-row span { color: var(--muted); font-size: 10px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
 
     .progress-track {
       overflow: hidden;
@@ -380,20 +380,23 @@
 
     .phase-nav {
       display: grid;
-      gap: 1px;
-      margin: 14px 0 0;
+      gap: 9px;
+      margin: 19px 0 0;
       padding: 0;
       list-style: none;
     }
 
     .phase-nav a {
       display: grid;
-      grid-template-columns: 18px minmax(0, 1fr) auto;
+      grid-template-columns: 26px minmax(0, 1fr) max-content max-content;
       align-items: center;
-      gap: 7px;
-      padding: 6px;
+      gap: 8px;
+      min-height: 48px;
+      padding: 8px 10px;
       color: var(--muted);
-      border-radius: 9px;
+      background: color-mix(in srgb, var(--surface-2) 72%, transparent);
+      border: 1px solid transparent;
+      border-radius: 14px;
       text-decoration: none;
       font-size: 11px;
       line-height: 1.2;
@@ -407,18 +410,38 @@
     .nav-dot {
       display: grid;
       place-items: center;
-      width: 18px;
-      height: 18px;
+      width: 26px;
+      height: 26px;
       color: var(--muted);
       background: var(--surface-3);
       border-radius: 50%;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 850;
+    }
+
+    .nav-title {
+      min-width: 0;
+      font-weight: 750;
+      line-height: 1.15;
     }
 
     .phase-nav a.is-complete { color: var(--success); background: color-mix(in srgb, var(--success) 10%, var(--surface)); }
     .phase-nav a.is-complete .nav-dot { color: #fff; background: var(--success); }
-    .nav-capital { font-size: 9px; white-space: nowrap; }
+    .nav-metrics {
+      display: contents;
+    }
+
+    .nav-metrics span {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 750;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .nav-metrics span:last-child { text-align: right; }
+
+    .phase-nav a.is-complete .nav-metrics { color: var(--success); }
 
     .main { min-width: 0; }
 
@@ -1205,8 +1228,8 @@
 
   <div class="workspace">
     <aside class="sidebar">
-      <h2 id="sidebarTitle">Дашборд капитала</h2>
-      <div class="progress-row"><strong id="progressValue">0%</strong><span id="progressNote">0 из 11 готово</span></div>
+      <h2 id="sidebarTitle">Дашборд проекта</h2>
+      <div class="progress-row"><span>Прогресс</span><strong id="progressValue">0%</strong></div>
       <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
       <nav aria-label="Навигация по этапам"><ol class="phase-nav" id="phaseNav"></ol></nav>
     </aside>
@@ -1283,8 +1306,8 @@
           </section>
           <section class="settings-section">
             <h3>Геометрия рабочего пространства</h3>
-            <div class="range-field"><div class="range-head"><label for="settingsWidth">Ширина контента</label><output id="settingsWidthValue">1080 px</output></div><input id="settingsWidth" name="workspaceWidth" type="range" min="760" max="1440" step="20"></div>
-            <div class="range-field"><div class="range-head"><label for="settingsSidebarWidth">Ширина левой панели</label><output id="settingsSidebarWidthValue">220 px</output></div><input id="settingsSidebarWidth" name="sidebarWidth" type="range" min="180" max="340" step="10"></div>
+            <div class="range-field"><div class="range-head"><label for="settingsWidth">Ширина центральной части</label><output id="settingsWidthValue">1240 px</output></div><input id="settingsWidth" name="workspaceWidth" type="range" min="820" max="1680" step="20"></div>
+            <div class="range-field"><div class="range-head"><label for="settingsSidebarWidth">Ширина левой панели</label><output id="settingsSidebarWidthValue">320 px</output></div><input id="settingsSidebarWidth" name="sidebarWidth" type="range" min="240" max="460" step="10"></div>
             <div class="range-field"><div class="range-head"><label for="settingsCardPadding">Высота и воздух карточек</label><output id="settingsCardPaddingValue">30 px</output></div><input id="settingsCardPadding" name="cardPadding" type="range" min="16" max="52" step="2"></div>
             <div class="range-field"><div class="range-head"><label for="settingsCardGap">Расстояние между этапами</label><output id="settingsCardGapValue">22 px</output></div><input id="settingsCardGap" name="cardGap" type="range" min="8" max="52" step="2"></div>
           </section>
@@ -1327,7 +1350,7 @@
     (function () {
       "use strict";
 
-      var STORAGE_KEY = "capital-os-workspace-v11";
+      var STORAGE_KEY = "capital-os-workspace-v13";
       var PHASE_COLORS = ["#635bff", "#446cff", "#1677ff", "#009f8b", "#18835e", "#d17b0f", "#b54708", "#c1447e", "#7a5af8", "#475467", "#12a150"];
       var STATUS_LABELS = {
         "not-started": "Не начато",
@@ -1720,10 +1743,10 @@
         var byId = Object.fromEntries(defaultPhases.map(function (phase) { return [phase.id, phase]; }));
 
         Object.assign(byId.foundation, {
-          capital: "$100,000",
-          obligations: "≤ $350,000",
+          capital: "$50,000",
+          obligations: "≤ $400,000",
           status: "not-started",
-          summary: "Собрать финансовую систему и снизить обязательства до $350,000.",
+          summary: "Собрать финансовую систему и зафиксировать обязательства на уровне не выше $400,000.",
           description: "Объединённый этап «Фундамент + безопасность обязательств». Сначала выстраиваем финансовую систему, затем приводим займы, сроки и валютные риски к понятному плану.",
           tasks: [
             { text: "Создана финансовая модель по доходу на 2026 год.", done: true },
@@ -1736,7 +1759,7 @@
             { text: "Все займы с валютным риском реинвестированы или хеджированы.", done: false },
             { text: "Все займы пролонгированы в соответствии с планом.", done: true },
             { text: "Проценты, сроки и суммы по каждому займу оптимизированы точечно.", done: true },
-            { text: "Общая сумма обязательств снижена до $350,000.", done: false }
+            { text: "Общая сумма обязательств зафиксирована на уровне не выше $400,000.", done: false }
           ],
           deliverables: [
             "Финансовая модель на 2026 год.",
@@ -1744,12 +1767,12 @@
             "Структура фондов «Сэйф» и Rate.",
             "Обновлённый реестр займов и обязательств."
           ],
-          gate: "Все 11 задач закрыты. Капитал — $100,000. Обязательства — не выше $350,000."
+          gate: "Все 11 задач закрыты. Капитал — $50,000. Обязательства — не выше $400,000."
         });
 
         Object.assign(byId.capitalization, {
           capital: "$150,000",
-          obligations: "≤ $250,000",
+          obligations: "≤ $300,000",
           summary: "Продать актив за $150,000 и направить $150,000 в капитал.",
           description: "Второй цикл: подготовка актива, продажа и направление денег в капитал.",
           tasks: [
@@ -1759,10 +1782,10 @@
             "Проведены переговоры с покупателем и согласованы документы.",
             "Актив продан за $150,000.",
             "$150,000 направлены в капитал.",
-            "Обязательства снижены до $250,000."
+            "Обязательства снижены до $300,000."
           ],
           deliverables: ["Закрытая сделка по продаже доли.", "Подтверждение поступления денег.", "Обновлённый баланс капитала и обязательств."],
-          gate: "Актив продан за $150,000. Капитал — $150,000. Обязательства — не выше $250,000."
+          gate: "Актив продан за $150,000. Капитал — $150,000. Обязательства — не выше $300,000."
         });
 
         Object.assign(byId.deleveraging, {
@@ -1785,7 +1808,7 @@
 
         Object.assign(byId["first-money"], {
           capital: "$150,000",
-          obligations: "≤ $250,000",
+          obligations: "≤ $300,000",
           summary: "Проверить и сбалансировать все финансовые потоки.",
           description: "Обновить финансовый план, разобрать потоки и запустить регулярные отчисления.",
           tasks: [
@@ -1799,7 +1822,7 @@
             "Провести базовое обучение по инвестиционной стратегии."
           ],
           deliverables: ["Обновлённый ФП №1.", "Запущенный фонд резервов.", "Зафиксированный неснижаемый остаток.", "Регламент взносов."],
-          gate: "Финансовый план обновлён. Все потоки имеют направление. Резервный фонд и регулярные отчисления в SAFE запущены."
+          gate: "Финансовый план обновлён. Все потоки имеют направление. Резервный фонд и регулярные отчисления в SAFE запущены. Капитал — $150,000. Обязательства — не выше $300,000."
         });
 
         Object.assign(byId["capital-safety"], {
@@ -1968,8 +1991,8 @@
             fontSize: "medium",
             depth: "soft",
             radiusPreset: 22,
-            workspaceWidth: 1080,
-            sidebarWidth: 220,
+            workspaceWidth: 1240,
+            sidebarWidth: 320,
             cardPadding: 30,
             cardGap: 22
           },
@@ -2097,8 +2120,8 @@
         document.body.dataset.font = settings.font || "modern";
         document.body.dataset.fontSize = settings.fontSize || "medium";
         document.body.dataset.depth = settings.depth || "soft";
-        document.body.style.setProperty("--workspace-width", (Number(settings.workspaceWidth) || 1080) + "px");
-        document.body.style.setProperty("--sidebar-width", (Number(settings.sidebarWidth) || 220) + "px");
+        document.body.style.setProperty("--workspace-width", (Number(settings.workspaceWidth) || 1240) + "px");
+        document.body.style.setProperty("--sidebar-width", (Number(settings.sidebarWidth) || 320) + "px");
         document.body.style.setProperty("--card-padding", (Number(settings.cardPadding) || 30) + "px");
         document.body.style.setProperty("--card-gap", (Number(settings.cardGap) || 22) + "px");
         document.body.style.setProperty("--radius", (Number(settings.radiusPreset) || 22) + "px");
@@ -2107,7 +2130,7 @@
       function renderHeader() {
         applyAppearance(state.settings);
         document.getElementById("projectTitle").textContent = state.project.title;
-        document.getElementById("sidebarTitle").textContent = "Дашборд капитала";
+        document.getElementById("sidebarTitle").textContent = "Дашборд проекта";
         document.getElementById("projectSubtitle").textContent = state.project.subtitle;
         var projectGoal = document.getElementById("projectGoal");
         var phaseCount = document.getElementById("phaseCount");
@@ -2122,13 +2145,12 @@
         var percent = total ? Math.round(done / total * 100) : 0;
         document.getElementById("progressValue").textContent = percent + "%";
         document.getElementById("progressFill").style.width = percent + "%";
-        document.getElementById("progressNote").textContent = done + " из " + total + " задач";
       }
 
       function renderNav() {
         phaseNav.innerHTML = state.phases.map(function (phase, index) {
           var stats = phaseStats(phase);
-          return '<li data-nav-id="' + escapeHtml(phase.id) + '"><a class="' + (stats.complete ? "is-complete" : "") + '" href="#phase-' + escapeHtml(phase.id) + '"><span class="nav-dot">' + (index + 1) + '</span><span>' + escapeHtml(phase.title) + '</span><span class="nav-capital">' + escapeHtml(phase.capital) + "</span></a></li>";
+          return '<li data-nav-id="' + escapeHtml(phase.id) + '"><a class="' + (stats.complete ? "is-complete" : "") + '" href="#phase-' + escapeHtml(phase.id) + '"><span class="nav-dot">' + (index + 1) + '</span><span class="nav-title">' + escapeHtml(phase.title) + '</span><span class="nav-metrics"><span title="Капитал">' + escapeHtml(phase.capital) + '</span><span title="Обязательства">' + escapeHtml(phase.obligations) + "</span></span></a></li>";
         }).join("");
       }
 
@@ -2295,8 +2317,8 @@
           fontSize: String(formData.get("fontSize") || "medium"),
           depth: String(formData.get("depth") || "soft"),
           radiusPreset: Number(formData.get("radiusPreset") || 22),
-          workspaceWidth: Number(formData.get("workspaceWidth") || 1080),
-          sidebarWidth: Number(formData.get("sidebarWidth") || 220),
+          workspaceWidth: Number(formData.get("workspaceWidth") || 1240),
+          sidebarWidth: Number(formData.get("sidebarWidth") || 320),
           cardPadding: Number(formData.get("cardPadding") || 30),
           cardGap: Number(formData.get("cardGap") || 22)
         };
@@ -2310,8 +2332,8 @@
         setFormValue(settingsForm, "fontSize", state.settings.fontSize || "medium");
         setFormValue(settingsForm, "depth", state.settings.depth || "soft");
         setFormValue(settingsForm, "radiusPreset", state.settings.radiusPreset || 22);
-        setFormValue(settingsForm, "workspaceWidth", state.settings.workspaceWidth || 1080);
-        setFormValue(settingsForm, "sidebarWidth", state.settings.sidebarWidth || 220);
+        setFormValue(settingsForm, "workspaceWidth", state.settings.workspaceWidth || 1240);
+        setFormValue(settingsForm, "sidebarWidth", state.settings.sidebarWidth || 320);
         setFormValue(settingsForm, "cardPadding", state.settings.cardPadding || 30);
         setFormValue(settingsForm, "cardGap", state.settings.cardGap || 22);
         var theme = settingsForm.querySelector('input[name="theme"][value="' + state.settings.theme + '"]');
